@@ -86,13 +86,14 @@ public class IoTActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (recDataString.charAt(0) == '#') {
-                                    /*String sensor0 = recDataString.substring(1, 5);
-                                    String sensor1 = recDataString.substring(6, 10);
+                                    String sensor0 = recDataString.substring(1, 5);
+                                    /*String sensor1 = recDataString.substring(6, 10);
                                     String sensor2 = recDataString.substring(11, 15);
                                     String sensor3 = recDataString.substring(16, 20);
                                     //Log.d(TAG," temp "+sensor0);
                                     sensorView0.setText(" Current Temperature = " + sensor0 + " C");
                                     globalTemp = sensor0 + "";*/
+                                    Log.d(TAG," borhan "+sensor0);
                                     readSerialData.setText("");
                                     readSerialData.setText(recDataString.toString());
                                 }
@@ -270,12 +271,8 @@ public class IoTActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        try {
-            //Don't leave Bluetooth sockets open when leaving activity
-            btSocket.close();
-        } catch (IOException e2) {
-            //insert code to deal with this
-        }
+        //Don't leave Bluetooth sockets open when leaving activity
+        //btSocket.close();
     }
 
     //Checks that the Android device Bluetooth is available and prompts to be turned on if off
@@ -289,6 +286,16 @@ public class IoTActivity extends AppCompatActivity {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, 1);
             }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            btSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
