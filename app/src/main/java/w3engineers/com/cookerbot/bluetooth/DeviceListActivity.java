@@ -85,6 +85,7 @@ public class DeviceListActivity extends Activity {
         }
     };
 
+
     private void checkBTState() {
         // Check device has Bluetooth and that it is turned on
     	 mBtAdapter=BluetoothAdapter.getDefaultAdapter(); // CHECK THIS OUT THAT IT WORKS!!!
@@ -102,3 +103,4 @@ public class DeviceListActivity extends Activity {
           }
         }
 }
+
