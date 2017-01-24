@@ -10,4 +10,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_io_t">IoTActivity</string>
     <string name="none_paired">No devices have been paired</string>
+
+    <string name="chicken_cook">Chicken</string>
+    <string name="beef_cook">Beef</string>
+    <string name="rice_cook">Rice</string>
+    <string name="noodles_cook">Noodles</string>
+    <string name="fish_cook">Fish</string>
+    <string name="read_data">Read Data</string>
+
+    <string name="bot_on">CookerBOT ON</string>
+    <string name="bot_off">CookerBOT Off</string>
 </resources>
+
+

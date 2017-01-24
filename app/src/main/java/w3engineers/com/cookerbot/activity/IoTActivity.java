@@ -50,6 +50,8 @@ public class IoTActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_io_t);
+
+
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 String readMessage = (String) msg.obj;                                                                // msg.arg1 = bytes from connect thread
@@ -57,6 +59,8 @@ public class IoTActivity extends AppCompatActivity {
 
             }
         };
+
+
 
 
         btnOn = (Button) findViewById(R.id.buttonOn);
