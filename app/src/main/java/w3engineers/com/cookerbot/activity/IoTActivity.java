@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     //Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
     //Button  chicken,beef,rice,noodles,poteto,salad;
-    TextView txtArduino, txtString, txtStringLength, sensorView0,readSerialData;
+    TextView txtArduino, txtString, txtStringLength, sensorView0, readSerialData;
     Handler bluetoothIn;
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
@@ -59,6 +60,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private RecyclerView recyclerView;
     private RecipeAdapter mAdapter;
     DBHandler db = new DBHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,15 +75,14 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
             }
         };
 
-
+        readSerialData = (TextView) findViewById(R.id.readSerialData);
 
         //apiText= (EditText) findViewById(R.id.apitext);
         //btnOn = (Button) findViewById(R.id.buttonOn);
         //btnOff = (Button) findViewById(R.id.buttonOff);
 
 
-        readSerialData= (TextView) findViewById(R.id.readSerialData);
-
+        readSerialData = (TextView) findViewById(R.id.readSerialData);
 
 
         bluetoothIn = new Handler() {
@@ -110,7 +111,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
                                 }
 
                                 recDataString.delete(0, recDataString.length());
-                                Log.d(TAG,"borhan"+recDataString.toString());
+                                Log.d(TAG, "borhan" + recDataString.toString());
                             }
                         });
                         //Log.d(TAG, " size " + userList.size());
@@ -127,7 +128,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new RecipeAdapter(recipeList,this);
+        mAdapter = new RecipeAdapter(recipeList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -149,10 +150,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     }
 
 
-
-
-        public void uu()
-        {
+    public void uu() {
             /*try {
                 if(message.equals("1.11"))
                 {
@@ -165,7 +163,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
             {
 
             }*/
-        }
+    }
 
     @Override
     protected void onResume() {
@@ -202,7 +200,6 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
         mConnectedThread.start();
         mConnectedThread.write("x");
     }
-
 
 
     private class ConnectedThread extends Thread {
@@ -277,10 +274,12 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
             }
         }
     }
+
     @Override
     public void back(int id, String name, String api) {
-        Log.d("borhan", name+"   "+api);
-        //mConnectedThread.write(api);
-        mConnectedThread.write("chicken:o+1:s#1:s#2:s#3:s#9:s#7:t*10");
+        Log.d("borhan", name + "   " + api);
+        String str = api + "\n";
+        mConnectedThread.write(str);
+
     }
 }
