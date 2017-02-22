@@ -7,9 +7,12 @@
             android:id="@+id/nav_iot"
             android:icon="@drawable/logo"
             android:title="CookBOT" />
+        <item
+            android:id="@+id/nav_create_recipe"
+            android:icon="@drawable/logo"
+            android:title="New Recipe" />
 
     </group>
-
     <item android:title="Communicate">
         <menu>
             <item
