@@ -71,7 +71,6 @@
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/ripple_bot_on"
                     android:text="@string/bot_off" />
-
             </LinearLayout>
 
             <LinearLayout
