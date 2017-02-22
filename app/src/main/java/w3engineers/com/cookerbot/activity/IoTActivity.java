@@ -4,12 +4,14 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,9 +36,10 @@ public class IoTActivity extends AppCompatActivity {
     private ConnectedThread mConnectedThread;
     final int handlerState = 0;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    Button btnOn, btnOff,chicken,beef,rice,noodles;
+    Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
     TextView txtArduino, txtString, txtStringLength, sensorView0,readSerialData;
     Handler bluetoothIn;
+    EditText apiText;
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
     int dataLength;
@@ -62,7 +65,7 @@ public class IoTActivity extends AppCompatActivity {
 
 
 
-
+        apiText= (EditText) findViewById(R.id.apitext);
         btnOn = (Button) findViewById(R.id.buttonOn);
         btnOff = (Button) findViewById(R.id.buttonOff);
 
@@ -70,11 +73,16 @@ public class IoTActivity extends AppCompatActivity {
         beef = (Button) findViewById(R.id.beef);
         rice = (Button) findViewById(R.id.rice);
         noodles = (Button) findViewById(R.id.noodles);
+        deviceOff = (Button) findViewById(R.id.deviceOff);
+        deviceOn = (Button) findViewById(R.id.deviceOn);
+        poteto = (Button) findViewById(R.id.poteto);
+        salad = (Button) findViewById(R.id.salad);
         readSerialData= (TextView) findViewById(R.id.readSerialData);
         chicken.setVisibility(View.INVISIBLE);
         beef.setVisibility(View.INVISIBLE);
         rice.setVisibility(View.INVISIBLE);
         noodles.setVisibility(View.INVISIBLE);
+
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -116,9 +124,33 @@ public class IoTActivity extends AppCompatActivity {
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
-
-
+        salad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConnectedThread.write("O");
+            }
+        });
+        poteto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConnectedThread.write("P");
+            }
+        });
         // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
+        deviceOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = apiText.getText().toString()+"\n";
+                Log.d(TAG," borhan "+str);
+                mConnectedThread.write(str);
+            }
+        });
+        deviceOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConnectedThread.write("Z");
+            }
+        });
         btnOff.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("A");    // Send "0" via Bluetooth

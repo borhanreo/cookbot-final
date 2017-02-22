@@ -13,13 +13,18 @@
 
     <string name="chicken_cook">Chicken</string>
     <string name="beef_cook">Beef</string>
-    <string name="rice_cook">Rice</string>
+    <string name="rice_cook">Potato FRI</string>
     <string name="noodles_cook">Noodles</string>
     <string name="fish_cook">Fish</string>
+    <string name="potato_fry">Potato fry</string>
     <string name="read_data">Read Data</string>
 
     <string name="bot_on">CookerBOT ON</string>
     <string name="bot_off">CookerBOT Off</string>
+
+    <!--<string name="waven_on">Woven OFF</string>-->
+    <string name="waven_on">Send </string>
+    <string name="waven_off">POTATO FRI</string>
 </resources>
 
 
