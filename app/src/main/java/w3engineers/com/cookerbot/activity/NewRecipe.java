@@ -87,6 +87,7 @@ public class NewRecipe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ch_po_ot.setEnabled(false);
+                Log.d(TAG," borhan here S#7");
                 globStr=globStr+":s#7";
             }
         });
@@ -170,7 +171,7 @@ public class NewRecipe extends AppCompatActivity {
                         {
                             int getAmount = Integer.parseInt(strValue);
                             //waterStr="w^"+ getTimeInSecondWater(getAmount);
-                            waterStr=":o+"+ getTimeInSecondWater(getAmount);
+                            waterStr=":w^"+ getTimeInSecondWater(getAmount);
                             globStr = globStr+waterStr;
                             WaterButton.setEnabled(false);
                             dialog.dismiss();

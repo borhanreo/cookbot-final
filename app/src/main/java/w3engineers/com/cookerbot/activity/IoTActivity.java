@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     //Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
     //Button  chicken,beef,rice,noodles,poteto,salad;
-    TextView txtArduino, txtString, txtStringLength, sensorView0, readSerialData;
+    TextView txtArduino, txtString, txtStringLength, sensorView0, readSerialData,seekValue;
     Handler bluetoothIn;
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
@@ -61,6 +62,9 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private RecipeAdapter mAdapter;
     DBHandler db = new DBHandler(this);
 
+    private SeekBar seekBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +78,34 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
 
             }
         };
+        seekBar = (SeekBar)findViewById(R.id.seekbar1);
+        seekValue = (TextView)findViewById(R.id.showSeekValue);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
 
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+                Log.d(TAG,"borhan1 "+progresValue);
+
+                seekValue.setText(progresValue+"");
+                String str = "V!"+progresValue + "\n";
+                mConnectedThread.write(str);
+                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //textView.setText("Covered: " + progress + "/" + seekBar.getMax());
+                Log.d(TAG,"borhan3 "+seekBar.getMax() );
+                //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+        });
         readSerialData = (TextView) findViewById(R.id.readSerialData);
 
         //apiText= (EditText) findViewById(R.id.apitext);
@@ -280,6 +311,5 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
         Log.d("borhan", name + "   " + api);
         String str = api + "\n";
         mConnectedThread.write(str);
-
     }
 }
