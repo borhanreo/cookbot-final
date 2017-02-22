@@ -25,6 +25,19 @@
     <!--<string name="waven_on">Woven OFF</string>-->
     <string name="waven_on">Send </string>
     <string name="waven_off">POTATO FRI</string>
+
+    <!--new recipe-->
+    <string name="oil">OIL</string>
+    <string name="water">WATER</string>
+    <string name="onion">ONION</string>
+    <string name="chili">CHILI</string>
+    <string name="salt">SALT</string>
+    <string name="mixed_spice">MIXED SPICE</string>
+
+    <string name="spud_grinding">SPUD GRINDING</string>
+    <string name="timer">TIMER</string>
+    <string name="other">CHICKEN/POTATO/OTHER </string>
+
 </resources>
 
 

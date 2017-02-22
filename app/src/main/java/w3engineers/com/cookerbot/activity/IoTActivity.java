@@ -52,7 +52,7 @@ public class IoTActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_io_t);
+        setContentView(R.layout.content_io_t);
 
 
         bluetoothIn = new Handler() {

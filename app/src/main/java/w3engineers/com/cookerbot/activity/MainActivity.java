@@ -92,8 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          if (id == R.id.nav_iot) {
             Intent intent = new Intent(MainActivity.this,DeviceListActivity.class);
             startActivity(intent);
-        }  else if (id == R.id.nav_send) {
-
+        }  else if (id == R.id.nav_create_recipe) {
+             Intent intent = new Intent(MainActivity.this,NewRecipe.class);
+             startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

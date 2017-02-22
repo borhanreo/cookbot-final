@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_recipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="w3engineers.com.cookerbot.activity.NewRecipe">
+
+    <LinearLayout
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/recipe_name"
+            android:layout_width="0dip"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:hint="Recipe Name"/>
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="0dip"
+            android:layout_weight=".3"
+            android:layout_height="wrap_content"
+            android:text="Reset"/>
+        <Button
+            android:id="@+id/create"
+            android:layout_width="0dip"
+            android:layout_weight=".3"
+            android:layout_height="wrap_content"
+            android:text="Create"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_below="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/oil"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/beef"
+            android:paddingTop="5dp"
+            android:text="@string/oil"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/water"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/chicken"
+            android:paddingTop="5dp"
+            android:text="@string/water"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/onion"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/rice"
+            android:paddingTop="5dp"
+            android:text="@string/onion"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_below="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/chili"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/beef"
+            android:paddingTop="5dp"
+            android:text="@string/chili"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/salt"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/chicken"
+            android:paddingTop="5dp"
+            android:text="@string/salt"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/mixed_spice"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/rice"
+            android:paddingTop="5dp"
+            android:text="@string/mixed_spice"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_below="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/spud_grinding"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/beef"
+            android:paddingTop="5dp"
+            android:text="@string/spud_grinding"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/timer"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/chicken"
+            android:paddingTop="5dp"
+            android:text="@string/timer"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/ch_pot_other"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/rice"
+            android:paddingTop="5dp"
+            android:text="@string/other"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+    <EditText
+        android:layout_below="@id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/apiString"/>
+</RelativeLayout>
