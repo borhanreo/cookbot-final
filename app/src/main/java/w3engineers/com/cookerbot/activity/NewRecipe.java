@@ -104,7 +104,7 @@ public class NewRecipe extends AppCompatActivity {
                 {
 
                     String recipeNameStr = recipe_name.getText().toString();
-                    globStr = recipeNameStr+":"+globStr;
+                    globStr = recipeNameStr+globStr;
                     db.addRecipe(new RecipeModel(1,recipeNameStr,globStr));
                     resetRecipe();
                 }else

@@ -4,27 +4,33 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
 import w3engineers.com.cookerbot.R;
+import w3engineers.com.cookerbot.adapter.RecipeAdapter;
 import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
+import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
+import w3engineers.com.cookerbot.dbhelper.DBHandler;
+import w3engineers.com.cookerbot.model.RecipeModel;
 
-public class IoTActivity extends AppCompatActivity {
+public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBackListener {
     private String TAG = "borhan";
 
     private static final int MESH_PORT = 1166;
@@ -36,10 +42,10 @@ public class IoTActivity extends AppCompatActivity {
     private ConnectedThread mConnectedThread;
     final int handlerState = 0;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
+    //Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
+    //Button  chicken,beef,rice,noodles,poteto,salad;
     TextView txtArduino, txtString, txtStringLength, sensorView0,readSerialData;
     Handler bluetoothIn;
-    EditText apiText;
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
     int dataLength;
@@ -49,6 +55,10 @@ public class IoTActivity extends AppCompatActivity {
     private long previousRuntime = 0L;
     private final long TIME_DELAY = 5000L;
 
+    private List<RecipeModel> recipeList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private RecipeAdapter mAdapter;
+    DBHandler db = new DBHandler(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,23 +75,13 @@ public class IoTActivity extends AppCompatActivity {
 
 
 
-        apiText= (EditText) findViewById(R.id.apitext);
-        btnOn = (Button) findViewById(R.id.buttonOn);
-        btnOff = (Button) findViewById(R.id.buttonOff);
+        //apiText= (EditText) findViewById(R.id.apitext);
+        //btnOn = (Button) findViewById(R.id.buttonOn);
+        //btnOff = (Button) findViewById(R.id.buttonOff);
 
-        chicken = (Button) findViewById(R.id.chicken);
-        beef = (Button) findViewById(R.id.beef);
-        rice = (Button) findViewById(R.id.rice);
-        noodles = (Button) findViewById(R.id.noodles);
-        deviceOff = (Button) findViewById(R.id.deviceOff);
-        deviceOn = (Button) findViewById(R.id.deviceOn);
-        poteto = (Button) findViewById(R.id.poteto);
-        salad = (Button) findViewById(R.id.salad);
+
         readSerialData= (TextView) findViewById(R.id.readSerialData);
-        chicken.setVisibility(View.INVISIBLE);
-        beef.setVisibility(View.INVISIBLE);
-        rice.setVisibility(View.INVISIBLE);
-        noodles.setVisibility(View.INVISIBLE);
+
 
 
         bluetoothIn = new Handler() {
@@ -124,81 +124,29 @@ public class IoTActivity extends AppCompatActivity {
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
-        salad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mConnectedThread.write("O");
-            }
-        });
-        poteto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mConnectedThread.write("P");
-            }
-        });
-        // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
-        deviceOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String str = apiText.getText().toString()+"\n";
-                Log.d(TAG," borhan "+str);
-                mConnectedThread.write(str);
-            }
-        });
-        deviceOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mConnectedThread.write("Z");
-            }
-        });
-        btnOff.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("A");    // Send "0" via Bluetooth
-                Toast.makeText(getBaseContext(), "Turn off Device", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        btnOn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("B");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "Turn on Devices", Toast.LENGTH_SHORT).show();
-                chicken.setVisibility(View.VISIBLE);
-                beef.setVisibility(View.VISIBLE);
-                rice.setVisibility(View.VISIBLE);
-                noodles.setVisibility(View.VISIBLE);
-            }
-        });
-        chicken.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("C");    // Send "0" via Bluetooth
-                Toast.makeText(getBaseContext(), "Turn off Device", Toast.LENGTH_SHORT).show();
-            }
-        });
+        mAdapter = new RecipeAdapter(recipeList,this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
 
-        beef.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("E");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "Turn on Devices", Toast.LENGTH_SHORT).show();
-            }
-        });
-        rice.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("D");    // Send "0" via Bluetooth
-                Toast.makeText(getBaseContext(), "Turn off Device", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        noodles.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("F");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "Turn on Devices", Toast.LENGTH_SHORT).show();
-            }
-        });
+        prepareRecipeModelData();
     }
+    //
 
+    /**/
 
-
+    private void prepareRecipeModelData() {
+        List<RecipeModel> recipeModels = db.getAllShops();
+        for (RecipeModel recipeModel : recipeModels) {
+            recipeModel = new RecipeModel(recipeModel.getId(), recipeModel.getRecipe_name(), recipeModel.getRecipe_api());
+            recipeList.add(recipeModel);
+        }
+        mAdapter.notifyDataSetChanged();
+    }
 
 
 
@@ -254,6 +202,8 @@ public class IoTActivity extends AppCompatActivity {
         mConnectedThread.start();
         mConnectedThread.write("x");
     }
+
+
 
     private class ConnectedThread extends Thread {
         private final InputStream mmInStream;
@@ -326,5 +276,11 @@ public class IoTActivity extends AppCompatActivity {
                 startActivityForResult(enableBtIntent, 1);
             }
         }
+    }
+    @Override
+    public void back(int id, String name, String api) {
+        Log.d("borhan", name+"   "+api);
+        //mConnectedThread.write(api);
+        mConnectedThread.write("chicken:o+1:s#1:s#2:s#3:s#9:s#7:t*10");
     }
 }
