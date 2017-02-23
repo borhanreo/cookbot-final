@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -20,15 +22,19 @@ import w3engineers.com.cookerbot.model.RecipeModel;
 public class NewRecipe extends AppCompatActivity {
 
     final Context context = this;
-    private Button Oilbutton,reset,WaterButton,spud_grinding,create,onion,chili,salt,mixed_spice,ch_po_ot;
-    private String hardwareApiString="", oilStr="",waterStr="",TAG="borhan",spudGrindingStr="",globStr="";
-    EditText amount_oil,recipe_name;
+    private Button Oilbutton, reset, WaterButton, spud_grinding, create, onion, chili, salt, mixed_spice, ch_po_ot, oven_heat;
+    private String hardwareApiString = "", oilStr = "", waterStr = "", TAG = "borhan", spudGrindingStr = "", globStr = "",heatStr="", showText="";
+    EditText amount_oil, recipe_name;
+    Spinner amount_heat;
+    TextView selected_option;
     DBHandler db = new DBHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_recipe);
-        reset = (Button)findViewById(R.id.reset);
+        this.setTitle("New Recipe");
+        reset = (Button) findViewById(R.id.reset);
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,22 +47,29 @@ public class NewRecipe extends AppCompatActivity {
                 resetRecipe();
             }
         });
+        selected_option = (TextView) findViewById(R.id.selected_option);
 
         Oilbutton = (Button) findViewById(R.id.oil);
         spud_grinding = (Button) findViewById(R.id.spud_grinding);
-        create = (Button)findViewById(R.id.create);
-        recipe_name=(EditText)findViewById(R.id.recipe_name);
+        create = (Button) findViewById(R.id.create);
+        recipe_name = (EditText) findViewById(R.id.recipe_name);
 
-        onion=(Button)findViewById(R.id.onion);
-        chili=(Button)findViewById(R.id.chili);
-        salt=(Button)findViewById(R.id.salt);
-        mixed_spice=(Button)findViewById(R.id.mixed_spice);
-        ch_po_ot=(Button)findViewById(R.id.ch_pot_other);
+
+        onion = (Button) findViewById(R.id.onion);
+        chili = (Button) findViewById(R.id.chili);
+        salt = (Button) findViewById(R.id.salt);
+        mixed_spice = (Button) findViewById(R.id.mixed_spice);
+        ch_po_ot = (Button) findViewById(R.id.ch_pot_other);
+        oven_heat = (Button) findViewById(R.id.oven_heat);
+
         onion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onion.setEnabled(false);
-                globStr=globStr+":s#1";
+                globStr = globStr + ":s#1";
+
+                showText = showText+", Onion";
+                selected_option.setText(showText);
 
             }
         });
@@ -65,7 +78,9 @@ public class NewRecipe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chili.setEnabled(false);
-                globStr=globStr+":s#2";
+                globStr = globStr + ":s#2";
+                showText = showText+", Chili";
+                selected_option.setText(showText);
             }
         });
 
@@ -73,44 +88,86 @@ public class NewRecipe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 salt.setEnabled(false);
-                globStr=globStr+":s#3";
+                globStr = globStr + ":s#3";
+                showText = showText+", Salt";
+                selected_option.setText(showText);
             }
         });
         mixed_spice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mixed_spice.setEnabled(false);
-                globStr=globStr+":s#9";
+                globStr = globStr + ":s#9";
+                showText = showText+", Mixed Spice";
+                selected_option.setText(showText);
             }
         });
         ch_po_ot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ch_po_ot.setEnabled(false);
-                Log.d(TAG," borhan here S#7");
-                globStr=globStr+":s#7";
+                globStr = globStr + ":s#7";
+
+                showText = showText+", CH/PO/OT";
+                selected_option.setText(showText);
             }
         });
-        onion.setOnClickListener(new View.OnClickListener() {
+        /*onion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onion.setEnabled(false);
-                globStr=globStr+":s#1";
+                globStr = globStr + ":s#1";
+            }
+        });*/
+        oven_heat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.oven_heat);
+                dialog.setTitle("Heat Status");
+                amount_oil = (EditText) dialog.findViewById(R.id.amount_oil);
+                amount_heat = (Spinner) dialog.findViewById(R.id.amount_heat);
+                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String heatText = amount_heat.getSelectedItem().toString();
+                        Log.d(TAG, " borhan " + heatText);
+                        int heatType = 0;
+                        if (heatText.equals("LOW")) {
+                            heatType = 1;
+                        } else if (heatText.equals("MEDIUM")) {
+                            heatType = 2;
+                        } else if (heatText.equals("HIGH")) {
+                            heatType = 3;
+                        }
+
+                        heatStr = ":h%" + heatType;
+                        globStr = globStr + heatStr;
+                        showText = showText+", Oven Heat";
+                        selected_option.setText(showText);
+                        dialog.dismiss();
+
+
+                    }
+                });
+
+                dialog.show();
             }
         });
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isEmpty(recipe_name))
-                {
+                if (!isEmpty(recipe_name)) {
 
                     String recipeNameStr = recipe_name.getText().toString();
-                    globStr = recipeNameStr+globStr;
-                    db.addRecipe(new RecipeModel(1,recipeNameStr,globStr));
+                    globStr = recipeNameStr + globStr;
+                    db.addRecipe(new RecipeModel(1, recipeNameStr, globStr));
+                    Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
                     resetRecipe();
-                }else
-                {
-                    Toast.makeText(context,"Please enter your recipe name",Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    Toast.makeText(context, "Please enter your recipe name", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -122,23 +179,23 @@ public class NewRecipe extends AppCompatActivity {
                 dialog.setContentView(R.layout.oiltimer);
                 dialog.setTitle("Oil in gm");
                 ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                 amount_oil = (EditText) dialog.findViewById(R.id.amount_oil) ;
+                amount_oil = (EditText) dialog.findViewById(R.id.amount_oil);
                 Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        String strValue= amount_oil.getText().toString();
-                        if (strValue==" " && strValue==null)
-                        {
-                            Toast.makeText(context,"Can not be empty or null or string",Toast.LENGTH_LONG).show();
-                        }else
-                        {
+                        String strValue = amount_oil.getText().toString();
+                        if (strValue == " " && strValue == null) {
+                            Toast.makeText(context, "Can not be empty or null or string", Toast.LENGTH_LONG).show();
+                        } else {
                             int getAmount = Integer.parseInt(strValue);
-                            oilStr=":o+"+ getTimeInSecondOil(getAmount);
-                            globStr = globStr+oilStr;
+                            oilStr = ":o+" + getTimeInSecondOil(getAmount);
+                            globStr = globStr + oilStr;
                             Oilbutton.setEnabled(false);
+                            showText = showText+", Oil";
+                            selected_option.setText(showText);
                             dialog.dismiss();
                         }
 
@@ -156,24 +213,24 @@ public class NewRecipe extends AppCompatActivity {
                 dialog.setContentView(R.layout.oiltimer);
                 dialog.setTitle("Water in gm");
                 ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                amount_oil = (EditText) dialog.findViewById(R.id.amount_oil) ;
+                amount_oil = (EditText) dialog.findViewById(R.id.amount_oil);
                 Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        String strValue= amount_oil.getText().toString();
-                        if (strValue==" " && strValue==null)
-                        {
-                            Toast.makeText(context,"Can not be empty or null or string",Toast.LENGTH_LONG).show();
-                        }else
-                        {
+                        String strValue = amount_oil.getText().toString();
+                        if (strValue == " " && strValue == null) {
+                            Toast.makeText(context, "Can not be empty or null or string", Toast.LENGTH_LONG).show();
+                        } else {
                             int getAmount = Integer.parseInt(strValue);
                             //waterStr="w^"+ getTimeInSecondWater(getAmount);
-                            waterStr=":w^"+ getTimeInSecondWater(getAmount);
-                            globStr = globStr+waterStr;
+                            waterStr = ":w^" + getTimeInSecondWater(getAmount);
+                            globStr = globStr + waterStr;
                             WaterButton.setEnabled(false);
+                            showText = showText+", Water";
+                            selected_option.setText(showText);
                             dialog.dismiss();
                         }
 
@@ -191,23 +248,23 @@ public class NewRecipe extends AppCompatActivity {
                 dialog.setContentView(R.layout.oiltimer);
                 dialog.setTitle("Spud Grinding in second");
                 ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                amount_oil = (EditText) dialog.findViewById(R.id.amount_oil) ;
+                amount_oil = (EditText) dialog.findViewById(R.id.amount_oil);
                 Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        String strValue= amount_oil.getText().toString();
-                        if (strValue==" " && strValue==null)
-                        {
-                            Toast.makeText(context,"Can not be empty or null or string",Toast.LENGTH_LONG).show();
-                        }else
-                        {
+                        String strValue = amount_oil.getText().toString();
+                        if (strValue == " " && strValue == null) {
+                            Toast.makeText(context, "Can not be empty or null or string", Toast.LENGTH_LONG).show();
+                        } else {
                             int getAmount = Integer.parseInt(strValue);
-                            spudGrindingStr=":t*"+ getAmount;
-                            globStr = globStr+spudGrindingStr;
+                            spudGrindingStr = ":t*" + getAmount;
+                            globStr = globStr + spudGrindingStr;
                             //spud_grinding.setEnabled(false);
+                            showText = showText+", Spud";
+                            selected_option.setText(showText);
                             dialog.dismiss();
                         }
 
@@ -218,38 +275,43 @@ public class NewRecipe extends AppCompatActivity {
             }
         });
     }
-    public int getTimeInSecondWater(int gm)
-    {
-        int rtn=0;
-        int second = gm/5;
-        return second;
-    } public int getTimeInSecondOil(int gm)
-    {
-        int rtn=0;
-        int second = gm/10;
+
+    public int getTimeInSecondWater(int gm) {
+        int rtn = 0;
+        int second = gm / 5;
         return second;
     }
-    public void resetRecipe()
-    {
+
+    public int getTimeInSecondOil(int gm) {
+        int rtn = 0;
+        int second = gm / 10;
+        return second;
+    }
+
+    public void resetRecipe() {
         Oilbutton.setEnabled(true);
-        oilStr="";
+        oilStr = "";
         WaterButton.setEnabled(true);
-        waterStr="";
+        waterStr = "";
         spud_grinding.setEnabled(true);
-        spudGrindingStr="";
+        spudGrindingStr = "";
 
         onion.setEnabled(true);
         chili.setEnabled(true);
         salt.setEnabled(true);
         mixed_spice.setEnabled(true);
         ch_po_ot.setEnabled(true);
+        oven_heat.setEnabled(true);
+        showText = "";
+        heatStr="";
         globStr = "";
 
     }
-    public void showToast( String str)
-    {
-        Toast.makeText(context,"Already add this "+ str,Toast.LENGTH_LONG).show();
+
+    public void showToast(String str) {
+        Toast.makeText(context, "Already add this " + str, Toast.LENGTH_LONG).show();
     }
+
     private boolean isEmpty(EditText etText) {
         if (etText.getText().toString().trim().length() > 0)
             return false;

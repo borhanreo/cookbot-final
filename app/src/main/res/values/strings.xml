@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CookerBOT</string>
+    <string name="app_name">CookBOT</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -37,6 +37,13 @@
     <string name="spud_grinding">SPUD GRINDING</string>
     <string name="timer">TIMER</string>
     <string name="other">CHICKEN/POTATO/OTHER </string>
+    <string name="oven_heat">OVEN HEAT</string>
+
+    <string-array name="oven">
+        <item>LOW</item>
+        <item>MEDIUM</item>
+        <item>HIGH</item>
+    </string-array>
 
 </resources>
 
