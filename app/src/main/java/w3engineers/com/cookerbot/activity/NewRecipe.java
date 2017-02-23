@@ -144,7 +144,7 @@ public class NewRecipe extends AppCompatActivity {
 
                         heatStr = ":h%" + heatType;
                         globStr = globStr + heatStr;
-                        showText = showText+", Oven Heat";
+                        showText = showText+", Oven Heat ("+heatText+")";
                         selected_option.setText(showText);
                         dialog.dismiss();
 
@@ -194,7 +194,7 @@ public class NewRecipe extends AppCompatActivity {
                             oilStr = ":o+" + getTimeInSecondOil(getAmount);
                             globStr = globStr + oilStr;
                             Oilbutton.setEnabled(false);
-                            showText = showText+", Oil";
+                            showText = showText+", Oil ("+strValue+" gm)";
                             selected_option.setText(showText);
                             dialog.dismiss();
                         }
@@ -229,7 +229,7 @@ public class NewRecipe extends AppCompatActivity {
                             waterStr = ":w^" + getTimeInSecondWater(getAmount);
                             globStr = globStr + waterStr;
                             WaterButton.setEnabled(false);
-                            showText = showText+", Water";
+                            showText = showText+", Water ("+strValue+" gm)";
                             selected_option.setText(showText);
                             dialog.dismiss();
                         }
@@ -245,6 +245,7 @@ public class NewRecipe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(context);
+
                 dialog.setContentView(R.layout.oiltimer);
                 dialog.setTitle("Spud Grinding in second");
                 ImageView image = (ImageView) dialog.findViewById(R.id.image);
@@ -263,7 +264,7 @@ public class NewRecipe extends AppCompatActivity {
                             spudGrindingStr = ":t*" + getAmount;
                             globStr = globStr + spudGrindingStr;
                             //spud_grinding.setEnabled(false);
-                            showText = showText+", Spud";
+                            showText = showText+", Spud ("+strValue+" sec)";
                             selected_option.setText(showText);
                             dialog.dismiss();
                         }
@@ -303,6 +304,7 @@ public class NewRecipe extends AppCompatActivity {
         ch_po_ot.setEnabled(true);
         oven_heat.setEnabled(true);
         showText = "";
+        selected_option.setText(showText);
         heatStr="";
         globStr = "";
 
