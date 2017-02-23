@@ -228,7 +228,7 @@ public class NewRecipe extends AppCompatActivity {
                             //waterStr="w^"+ getTimeInSecondWater(getAmount);
                             waterStr = ":w^" + getTimeInSecondWater(getAmount);
                             globStr = globStr + waterStr;
-                            WaterButton.setEnabled(false);
+                            //WaterButton.setEnabled(false);
                             showText = showText+", Water ("+strValue+" gm)";
                             selected_option.setText(showText);
                             dialog.dismiss();

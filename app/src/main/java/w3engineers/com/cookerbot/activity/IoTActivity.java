@@ -67,8 +67,9 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     DBHandler db = new DBHandler(this);
 
     private SeekBar seekBar;
-    Dialog dialog=null;
-    TextView show_recipe_status=null;
+    Dialog dialog = null;
+    TextView show_recipe_status = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,26 +135,32 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
                             @Override
                             public void run() {
                                 if (recDataString.charAt(0) == '#') {
-                                    String isCompleted = recDataString.substring(1, 16);
-                                    //Log.d(TAG,"borhan 1 "+isCompleted);
-                                    //Log.d(TAG,"borhan 1 "+isCompleted.length());
+                                    try {
+                                        String isCompleted = recDataString.substring(1, 16);
+                                        //Log.d(TAG,"borhan 1 "+isCompleted);
+                                        //Log.d(TAG,"borhan 1 "+isCompleted.length());
                                     /*String sensor1 = recDataString.substring(6, 10);
                                     String sensor2 = recDataString.substring(11, 15);
                                     String sensor3 = recDataString.substring(16, 20);
                                     //Log.d(TAG," temp "+sensor0);
                                     sensorView0.setText(" Current Temperature = " + sensor0 + " C");
                                     globalTemp = sensor0 + "";*/
+                                        if (show_recipe_status != null) {
+                                            show_recipe_status.setText("");
+                                            show_recipe_status.setText(recDataString.toString());
+                                        }
+                                        if (isCompleted.equals(" COOK COMPLETED")) {
+                                            //Log.d(TAG,"borhan 2 "+isCompleted);
+                                            dialog.dismiss();
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
                                     readSerialData.setText("");
                                     readSerialData.setText(recDataString.toString());
-                                    if(show_recipe_status!=null)
-                                    {
+                                    if (show_recipe_status != null) {
                                         show_recipe_status.setText("");
                                         show_recipe_status.setText(recDataString.toString());
-                                    }
-                                    if(isCompleted.equals(" COOK COMPLETED"))
-                                    {
-                                        //Log.d(TAG,"borhan 2 "+isCompleted);
-                                        dialog.dismiss();
                                     }
                                 }
 
@@ -327,16 +334,16 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
         Log.d("borhan", name + "   " + api);
         String str = api + "\n";
         mConnectedThread.write(str);
-        openDialog(this,name,api);
+        openDialog(this, name, api);
     }
 
-    private void openDialog(Context context,String recipeName, String api) {
+    private void openDialog(Context context, String recipeName, String api) {
         dialog = new Dialog(context);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.recipe_run);
-        dialog.setTitle("Recipe Name:  "+recipeName);
+        dialog.setTitle("Recipe Name:  " + recipeName);
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-        show_recipe_status = (TextView)dialog.findViewById(R.id.show_recipe_status);
+        show_recipe_status = (TextView) dialog.findViewById(R.id.show_recipe_status);
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
