@@ -38,7 +38,7 @@ public class NewRecipe extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<RecipeModel> recipeModels = db.getAllShops();
+                List<RecipeModel> recipeModels = db.getAllRecipe();
 
                 for (RecipeModel recipeModel : recipeModels) {
                     String log = "Id: " + recipeModel.getId() + " ,Name: " + recipeModel.getRecipe_name() + " ,Address: " + recipeModel.getRecipe_api();

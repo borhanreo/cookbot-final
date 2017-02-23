@@ -25,12 +25,16 @@
         <activity
             android:name=".bluetooth.DeviceListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.IoTActivity"
             android:label="@string/title_activity_io_t"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.NewRecipe" />
+        <activity
+            android:name=".activity.RecipeList"
+            android:label="@string/title_activity_recipe_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.NewRecipe"></activity>
     </application>
 
 </manifest>

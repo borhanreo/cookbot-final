@@ -15,8 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -195,7 +193,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     /**/
 
     private void prepareRecipeModelData() {
-        List<RecipeModel> recipeModels = db.getAllShops();
+        List<RecipeModel> recipeModels = db.getAllRecipe();
         for (RecipeModel recipeModel : recipeModels) {
             recipeModel = new RecipeModel(recipeModel.getId(), recipeModel.getRecipe_name(), recipeModel.getRecipe_api());
             recipeList.add(recipeModel);

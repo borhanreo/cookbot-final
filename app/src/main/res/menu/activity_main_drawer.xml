@@ -11,6 +11,10 @@
             android:id="@+id/nav_create_recipe"
             android:icon="@drawable/logo"
             android:title="New Recipe" />
+        <item
+            android:id="@+id/nav_recipe_list"
+            android:icon="@drawable/logo"
+            android:title="Recipe List" />
 
     </group>
     <item android:title="Communicate">

@@ -69,7 +69,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Shops
-    public List<RecipeModel> getAllShops() {
+    public List<RecipeModel> getAllRecipe() {
         List<RecipeModel> shopList = new ArrayList<RecipeModel>();
 // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_RECIPE;
@@ -86,4 +86,20 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return shopList;
     }
+
+    public boolean DeleteData(int id) {
+        String selectQuery = "DELETE * FROM " + TABLE_RECIPE +" WHERE id="+id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        return true;
+    }
+    public void deleteSingleContact(String title){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_RECIPE,   "id=?", new String[]{title});
+//KEY_NAME is a column name
+    }
+
+
 }

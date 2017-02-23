@@ -23,11 +23,11 @@
         android:text="Chicken"/>
 
     <TextView
-        android:id="@+id/title"
-        android:layout_below="@id/title"
+        android:id="@+id/key_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="AA"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/recipeApi"

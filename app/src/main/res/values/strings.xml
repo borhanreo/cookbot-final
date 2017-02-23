@@ -44,6 +44,9 @@
         <item>MEDIUM</item>
         <item>HIGH</item>
     </string-array>
+    <string name="title_activity_create_new">CreateNewActivity</string>
+    <string name="title_activity_create_new_recipe">CreateNewRecipe</string>
+    <string name="title_activity_recipe_list">RecipeList</string>
 
 </resources>
 
