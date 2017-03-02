@@ -1,6 +1,5 @@
 package w3engineers.com.cookerbot.adapter;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import static android.content.ContentValues.TAG;
  */
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHolder> {
-    private List<RecipeModel> moviesList;
+    private List<RecipeModel> recipeList;
     private OnItemSelectCallBackListener onItemSelectCallBackListener =null;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -37,10 +36,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
 
 
     public RecipeAdapter(List<RecipeModel> moviesList, OnItemSelectCallBackListener onItemSelectCallBackListener) {
-        this.moviesList = moviesList;
+        this.recipeList = moviesList;
         this.onItemSelectCallBackListener = onItemSelectCallBackListener;
     }
+    public void delete(int position){
+        recipeList.remove(position);
+        notifyItemRemoved(position);
+    }
 
+    public int getSize(){
+        return recipeList.size();
+    }
     /*@Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -68,7 +74,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        RecipeModel recipeModel = moviesList.get(position);
+        RecipeModel recipeModel = recipeList.get(position);
         Log.d(TAG,"borhan"+recipeModel.getId());
         Log.d(TAG,"borhan "+holder.keyId);
         holder.keyId.setText(recipeModel.getId()+"");
@@ -78,6 +84,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return recipeList.size();
     }
 }

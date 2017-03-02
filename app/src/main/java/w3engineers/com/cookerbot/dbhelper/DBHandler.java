@@ -29,16 +29,42 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
+        String CREATE_RECIPE_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + RECIPE_NAME + " TEXT,"
                 + RECIPE_API + " TEXT" + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+        db.execSQL(CREATE_RECIPE_TABLE);
+
+        String chickenApi="o+18:t*60:s#1:t*1:s#2:t*1:s#3:t*1:s#9:t*120:w^100:t*300:s#7:t*1:w^100:t*600:w^300:t*900";
+        ContentValues initialValuesChicken = new ContentValues();
+        initialValuesChicken.put(RECIPE_NAME, "System Chicken");
+        initialValuesChicken.put(RECIPE_API, chickenApi);
+
+        String PotatoFryApi="o+18:t*30:s#1:t*1:s#2:t*1:s#3:t*1:s#7:t*900";
+        ContentValues initialValuesPotatoFry = new ContentValues();
+        initialValuesPotatoFry.put(RECIPE_NAME, "System Potato Fry");
+        initialValuesPotatoFry.put(RECIPE_API, PotatoFryApi); //Vegetable cooking
+
+        String VagetableApi="o+18:t*30:s#1:t*1:s#2:t*120:s#7:t*1:s#3:s#4:w^500";
+        ContentValues initialValuesVagetableFry = new ContentValues();
+        initialValuesVagetableFry.put(RECIPE_NAME, "System Vegetable cooking");
+        initialValuesVagetableFry.put(RECIPE_API, VagetableApi);
+
+        String resetApi="o+1:W^1:s#1:s#2:s#3:s#9:s#7:t*1";
+        ContentValues initialValuesResetFry = new ContentValues();
+        initialValuesResetFry.put(RECIPE_NAME, "System Reset");
+        initialValuesResetFry.put(RECIPE_API, resetApi);
+
+        db.insert(TABLE_RECIPE, null, initialValuesChicken);
+        db.insert(TABLE_RECIPE, null, initialValuesPotatoFry);
+        db.insert(TABLE_RECIPE, null, initialValuesVagetableFry);
+        db.insert(TABLE_RECIPE, null, initialValuesResetFry);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE);
         onCreate(db);
+
     }
 
     public DBHandler(Context context) {
@@ -98,7 +124,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RECIPE,   "id=?", new String[]{title});
-//KEY_NAME is a column name
     }
 
 

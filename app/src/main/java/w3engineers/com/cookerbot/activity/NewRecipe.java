@@ -211,7 +211,7 @@ public class NewRecipe extends AppCompatActivity {
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.oiltimer);
-                dialog.setTitle("Water in gm");
+                dialog.setTitle("Water in ml");
                 ImageView image = (ImageView) dialog.findViewById(R.id.image);
                 amount_oil = (EditText) dialog.findViewById(R.id.amount_oil);
                 Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
@@ -229,7 +229,7 @@ public class NewRecipe extends AppCompatActivity {
                             waterStr = ":w^" + getTimeInSecondWater(getAmount);
                             globStr = globStr + waterStr;
                             //WaterButton.setEnabled(false);
-                            showText = showText+", Water ("+strValue+" gm)";
+                            showText = showText+", Water ("+strValue+" ml)";
                             selected_option.setText(showText);
                             dialog.dismiss();
                         }
@@ -279,7 +279,7 @@ public class NewRecipe extends AppCompatActivity {
 
     public int getTimeInSecondWater(int gm) {
         int rtn = 0;
-        int second = gm / 5;
+        int second = gm / 100;
         return second;
     }
 
