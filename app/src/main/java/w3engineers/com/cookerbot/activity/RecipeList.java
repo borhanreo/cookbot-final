@@ -48,7 +48,6 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
                         .setAction("Action", null).show();
             }
         });
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mAdapter = new RecipeAdapter(recipeList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
