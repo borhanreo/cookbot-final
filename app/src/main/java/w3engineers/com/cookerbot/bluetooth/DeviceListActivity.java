@@ -72,16 +72,22 @@ public class DeviceListActivity extends Activity {
     // Set up on-click listener for the list (nicked this - unsure)
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
+            try
+            {
+                textView1.setText("Connecting...");
+                // Get the device MAC address, which is the last 17 chars in the View
+                String info = ((TextView) v).getText().toString();
+                String address = info.substring(info.length() - 17);
 
-        	textView1.setText("Connecting...");
-            // Get the device MAC address, which is the last 17 chars in the View
-            String info = ((TextView) v).getText().toString();
-            String address = info.substring(info.length() - 17);
+                // Make an intent to start next activity while taking an extra which is the MAC address.
+                Intent i = new Intent(DeviceListActivity.this, IoTActivity.class);
+                i.putExtra(EXTRA_DEVICE_ADDRESS, address);
+                startActivity(i);
+            }catch (Exception ex)
+            {
+                Log.d("borhan","borhan "+ex.toString());
+            }
 
-            // Make an intent to start next activity while taking an extra which is the MAC address.
-			Intent i = new Intent(DeviceListActivity.this, IoTActivity.class);
-            i.putExtra(EXTRA_DEVICE_ADDRESS, address);
-			startActivity(i);   
         }
     };
 

@@ -77,7 +77,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 String readMessage = (String) msg.obj;                                                                // msg.arg1 = bytes from connect thread
-                Log.d(TAG, "  " + readMessage);
+                Log.d(TAG, "  m " + readMessage);
 
             }
         };
@@ -89,12 +89,11 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
                 progress = progresValue;
-                Log.d(TAG, "borhan1 " + progresValue);
+                //Log.d(TAG, "borhan1 " + progresValue);
 
                 seekValue.setText(progresValue + "");
                 String str = "V!" + progresValue + "\n";
                 mConnectedThread.write(str);
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -105,7 +104,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //textView.setText("Covered: " + progress + "/" + seekBar.getMax());
-                Log.d(TAG, "borhan3 " + seekBar.getMax());
+                //Log.d(TAG, "borhan3 " + seekBar.getMax());
                 //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
             }
         });
