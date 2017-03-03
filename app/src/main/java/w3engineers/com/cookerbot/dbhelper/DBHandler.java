@@ -34,7 +34,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + RECIPE_API + " TEXT" + ")";
         db.execSQL(CREATE_RECIPE_TABLE);
 
-        String chickenApi="o+18:t*60:s#1:t*1:s#2:t*1:s#3:t*1:s#9:t*120:w^100:t*300:s#7:t*1:w^100:t*600:w^300:t*900";
+        String chickenApi="o+18:t*160:s#1:t*1:s#2:t*1:s#3:t*1:s#9:t*120:w^1:t*300:s#7:t*1:w^1:t*600:w^4:t*900";
         ContentValues initialValuesChicken = new ContentValues();
         initialValuesChicken.put(RECIPE_NAME, "System Chicken");
         initialValuesChicken.put(RECIPE_API, chickenApi);
@@ -44,7 +44,7 @@ public class DBHandler extends SQLiteOpenHelper {
         initialValuesPotatoFry.put(RECIPE_NAME, "System Potato Fry");
         initialValuesPotatoFry.put(RECIPE_API, PotatoFryApi); //Vegetable cooking
 
-        String VagetableApi="o+18:t*30:s#1:t*1:s#2:t*120:s#7:t*1:s#3:s#4:w^500";
+        String VagetableApi="o+18:t*30:s#1:t*1:s#2:t*120:s#7:t*1:s#3:s#4:w^5";
         ContentValues initialValuesVagetableFry = new ContentValues();
         initialValuesVagetableFry.put(RECIPE_NAME, "System Vegetable cooking");
         initialValuesVagetableFry.put(RECIPE_API, VagetableApi);
