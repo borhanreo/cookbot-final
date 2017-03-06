@@ -139,7 +139,6 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                     recDataString.append(readMessage);
                     int endOfLineIndex = recDataString.indexOf("~");
                     if (endOfLineIndex > 0) {
-
                         dataInPrint = recDataString.substring(0, endOfLineIndex);
                         dataLength = dataInPrint.length();
                         runOnUiThread(new Runnable() {
