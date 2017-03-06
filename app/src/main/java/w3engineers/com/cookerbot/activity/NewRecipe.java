@@ -221,7 +221,7 @@ public class NewRecipe extends AppCompatActivity {
                     public void onClick(View v) {
 
                         String strValue = amount_oil.getText().toString();
-                        if (strValue == " " && strValue == null) {
+                        if (strValue.equals("") || strValue.equals(" ")) {
                             Toast.makeText(context, "Can not be empty or null or string", Toast.LENGTH_LONG).show();
                         } else {
                             int getAmount = Integer.parseInt(strValue);

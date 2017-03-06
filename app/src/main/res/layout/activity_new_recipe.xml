@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/beef"
+            android:drawableTop="@drawable/oil"
             android:paddingTop="5dp"
             android:text="@string/oil"
             android:textAllCaps="true"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/chicken"
+            android:drawableTop="@drawable/water"
             android:paddingTop="5dp"
             android:text="@string/water"
             android:textAllCaps="true"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/rice"
+            android:drawableTop="@drawable/onion"
             android:paddingTop="5dp"
             android:text="@string/onion"
             android:textAllCaps="true"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/beef"
+            android:drawableTop="@drawable/chili"
             android:paddingTop="5dp"
             android:text="@string/chili"
             android:textAllCaps="true"
@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/chicken"
+            android:drawableTop="@drawable/salt"
             android:paddingTop="5dp"
             android:text="@string/salt"
             android:textAllCaps="true"
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/rice"
+            android:drawableTop="@drawable/spice"
             android:paddingTop="5dp"
             android:text="@string/mixed_spice"
             android:textAllCaps="true"
@@ -167,14 +167,14 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/beef"
+            android:drawableTop="@drawable/spud"
             android:paddingTop="5dp"
             android:text="@string/spud_grinding"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <Button
+        <!--<Button
             android:id="@+id/timer"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
             android:text="@string/timer"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp" />-->
 
         <Button
             android:id="@+id/ch_pot_other"
@@ -193,13 +193,24 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3256"
             android:background="@drawable/haptic"
-            android:drawableTop="@drawable/rice"
+            android:drawableTop="@drawable/chicken"
             android:paddingTop="5dp"
             android:text="@string/other"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="15sp" />
-
+        <Button
+            android:id="@+id/oven_heat"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3256"
+            android:background="@drawable/haptic"
+            android:drawableTop="@drawable/heat"
+            android:paddingTop="5dp"
+            android:text="@string/oven_heat"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -212,20 +223,9 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:id="@+id/oven_heat"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3256"
-            android:background="@drawable/haptic"
-            android:drawableTop="@drawable/beef"
-            android:paddingTop="5dp"
-            android:text="@string/oven_heat"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
 
-        <Button
+
+        <!--<Button
             android:id="@+id/a"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
             android:text="B"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp" />-->
     </LinearLayout>
 
     <EditText

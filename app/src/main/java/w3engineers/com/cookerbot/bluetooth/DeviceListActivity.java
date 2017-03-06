@@ -1,8 +1,10 @@
 package w3engineers.com.cookerbot.bluetooth;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +13,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +24,13 @@ import java.util.Set;
 
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.activity.IoTActivity;
+import w3engineers.com.cookerbot.activity.RecipeActivity;
 
 
 public class DeviceListActivity extends Activity {
     private static final String TAG = "DeviceListActivity";
     private static final boolean D = true;
+    private Context context;
 
     TextView textView1;
 
@@ -33,11 +40,14 @@ public class DeviceListActivity extends Activity {
     // Member fields
     private BluetoothAdapter mBtAdapter;
     private ArrayAdapter<String> mPairedDevicesArrayAdapter;
+    EditText amount_oil;
+    Spinner amount_heat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_list);
+        context = this;
     }
 
     @Override
@@ -71,7 +81,42 @@ public class DeviceListActivity extends Activity {
     // Set up on-click listener for the list (nicked this - unsure)
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
-            try {
+            textView1.setText("Connecting...");
+            // Get the device MAC address, which is the last 17 chars in the View
+            String info = ((TextView) v).getText().toString();
+            final String address = info.substring(info.length() - 17);
+
+            final Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.recipe_mode_selector);
+            dialog.setTitle("Select Mode");
+            amount_heat = (Spinner) dialog.findViewById(R.id.amount_heat);
+            Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String strValue = amount_heat.getSelectedItem().toString();
+                    if (strValue.equals("Automatic")) {
+                        Intent i = new Intent(DeviceListActivity.this, IoTActivity.class);
+                        i.putExtra(EXTRA_DEVICE_ADDRESS, address);
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(DeviceListActivity.this, RecipeActivity.class);
+                        i.putExtra(EXTRA_DEVICE_ADDRESS, address);
+                        startActivity(i);
+                    }
+
+                    dialog.dismiss();
+
+
+                }
+            });
+
+            dialog.show();
+
+
+            /*try {
                 textView1.setText("Connecting...");
                 // Get the device MAC address, which is the last 17 chars in the View
                 String info = ((TextView) v).getText().toString();
@@ -83,7 +128,7 @@ public class DeviceListActivity extends Activity {
                 startActivity(i);
             } catch (Exception ex) {
                 Log.d("borhan", "borhan " + ex.toString());
-            }
+            }*/
 
         }
     };
