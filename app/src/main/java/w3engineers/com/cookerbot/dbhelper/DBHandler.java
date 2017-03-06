@@ -34,17 +34,18 @@ public class DBHandler extends SQLiteOpenHelper {
                 + RECIPE_API + " TEXT" + ")";
         db.execSQL(CREATE_RECIPE_TABLE);
 
-        String chickenApi="o+18:t*160:s#1:t*1:s#2:t*1:s#3:t*1:s#9:t*120:w^1:t*300:s#7:t*1:w^1:t*600:w^4:t*900";
+        //String chickenApi="o+18:t*160:s#1:t*1:s#2:t*1:s#3:t*1:s#9:t*120:w^1:t*300:s#7:t*1:w^1:t*600:w^4:t*900";
+        String chickenApi="o+10:t*120:s#1:s#2:s#3:s#9:w^1:t*90:s#7:t*1:w^4:t*300:w^8:t*1020";
         ContentValues initialValuesChicken = new ContentValues();
         initialValuesChicken.put(RECIPE_NAME, "System Chicken");
         initialValuesChicken.put(RECIPE_API, chickenApi);
 
-        String PotatoFryApi="o+18:t*30:s#1:t*1:s#2:t*1:s#3:t*1:s#7:t*900";
+        String PotatoFryApi="o+10:t*30:s#1:t*1:s#2:t*1:s#3:t*1:s#7:t*900";
         ContentValues initialValuesPotatoFry = new ContentValues();
         initialValuesPotatoFry.put(RECIPE_NAME, "System Potato Fry");
         initialValuesPotatoFry.put(RECIPE_API, PotatoFryApi); //Vegetable cooking
 
-        String VagetableApi="o+18:t*30:s#1:t*1:s#2:t*120:s#7:t*1:s#3:s#4:w^5";
+        String VagetableApi="o+10:t*30:s#1:t*1:s#2:t*120:s#7:t*1:s#3:s#4:w^5";
         ContentValues initialValuesVagetableFry = new ContentValues();
         initialValuesVagetableFry.put(RECIPE_NAME, "System Vegetable cooking");
         initialValuesVagetableFry.put(RECIPE_API, VagetableApi);
@@ -54,17 +55,22 @@ public class DBHandler extends SQLiteOpenHelper {
         initialValuesResetFry.put(RECIPE_NAME, "System Reset");
         initialValuesResetFry.put(RECIPE_API, resetApi);
 
+        /*String chickenApi22="o+18:t*1:s#1:t*1:s#2:t*1:s#3:t*1:s#9:t*1:w^1:t*3:s#7:t*1:w^1:t*6:w^4:t*9";
+        ContentValues initialValuesChicken22 = new ContentValues();
+        initialValuesChicken22.put(RECIPE_NAME, "System Chicken RR");
+        initialValuesChicken22.put(RECIPE_API, chickenApi22);*/
+
         db.insert(TABLE_RECIPE, null, initialValuesChicken);
         db.insert(TABLE_RECIPE, null, initialValuesPotatoFry);
         db.insert(TABLE_RECIPE, null, initialValuesVagetableFry);
         db.insert(TABLE_RECIPE, null, initialValuesResetFry);
+        //db.insert(TABLE_RECIPE, null, initialValuesChicken22);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE);
         onCreate(db);
-
     }
 
     public DBHandler(Context context) {
