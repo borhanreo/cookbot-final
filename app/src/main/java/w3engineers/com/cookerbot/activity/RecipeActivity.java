@@ -249,7 +249,6 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
 
         readSerialData = (TextView) findViewById(R.id.readSerialData);
 
-
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == handlerState) {
