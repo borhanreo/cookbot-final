@@ -67,12 +67,12 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private SeekBar seekBar;
     Dialog dialog = null;
     TextView show_recipe_status = null;
-
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_io_t);
-
+        context = this;
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -327,18 +327,42 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     }
 
     @Override
-    public void back(int id, String name, String api) {
-        Log.d("borhan", name + "   " + api);
-        String str = api + "\n";
-        mConnectedThread.write(str);
-        openDialog(this, name, api);
+    public void back(int id, final String name, final String api) {
+
+        final String str = name+":b=1:"+api +":b-1"+ "\n";
+        Log.d("borhan", str);
+
+        dialog = new Dialog(this);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.recipe_confirm);
+        dialog.setTitle("Are your want to cook ");
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        Button dialogButtonCancel = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+
+        show_recipe_status = (TextView) dialog.findViewById(R.id.show_recipe_status);
+        show_recipe_status.setText(name);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConnectedThread.write(str);
+                dialog.dismiss();
+                openDialog(context, name, api);
+            }
+        });
+        dialogButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void openDialog(Context context, String recipeName, String api) {
         dialog = new Dialog(context);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.recipe_run);
-        dialog.setTitle("Recipe Name:  " + recipeName);
+        dialog.setTitle(recipeName);
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
         show_recipe_status = (TextView) dialog.findViewById(R.id.show_recipe_status);
         dialogButton.setOnClickListener(new View.OnClickListener() {

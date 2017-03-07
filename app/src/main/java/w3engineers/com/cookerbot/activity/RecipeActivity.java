@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,23 +70,173 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
 
     private SeekBar seekBar;
     Dialog dialog = null;
-    TextView show_recipe_status = null;
+    TextView show_recipe_status = null,selected_option;
+    private Button ovenOn,ovenOff,oil,water,onion,chili,salt,mixed_spice,ch_pot_other,spud_grinding,create;
+    private String globalvalue="", setStr="";
+    private TextView recipeName;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context = this;
+        ovenOn = (Button)findViewById(R.id.on);
+        ovenOff = (Button)findViewById(R.id.off);
+        oil = (Button)findViewById(R.id.oil);
+        water = (Button)findViewById(R.id.water);
+        onion = (Button)findViewById(R.id.onion);
+        chili = (Button)findViewById(R.id.chili);
+        salt = (Button)findViewById(R.id.salt);
+        mixed_spice = (Button)findViewById(R.id.mixed_spice);
+        ch_pot_other = (Button)findViewById(R.id.ch_pot_other);
+        spud_grinding = (Button)findViewById(R.id.spud_grinding);
+        create = (Button)findViewById(R.id.create);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        selected_option= (TextView) findViewById(R.id.selected_option);
+        recipeName = (EditText) findViewById(R.id.recipe_name);
+
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                String ed_text = recipeName.getText().toString().trim();
+
+                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null)
+                {
+                    //EditText is empty
+                    Toast.makeText(context,"Recipe name could not be empty",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+
+                    db.addRecipe(new RecipeModel(1, ed_text, globalvalue));
+                    Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
+                    //EditText is not empty
+                    Log.d(TAG,"c "+globalvalue);
+                    globalvalue = "";
+                }
+
             }
         });
 
+        ovenOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ovenOnApi=":b=1";
+
+                globalvalue=globalvalue+ovenOnApi;
+                String appendStr="Oven On: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+ovenOnApi+"\n");
+            }
+        });
+        ovenOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ovenOffApi=":b-1";
+                globalvalue=globalvalue+ovenOffApi;
+                String appendStr="Oven Off: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+ovenOffApi+"\n");
+
+            }
+        });
+        oil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":o+5";
+                globalvalue=globalvalue+oilApi;
+
+                String appendStr="Being Oil: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+        water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":w^1";
+                globalvalue=globalvalue+oilApi;
+
+                String appendStr="Being Water: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+
+        onion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":s#1";
+                globalvalue=globalvalue+oilApi;
+
+                String appendStr="Being Onion: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+        chili.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":s#2";
+                globalvalue=globalvalue+oilApi;
+                String appendStr="Being Chili: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+        salt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":s#3";
+                globalvalue=globalvalue+oilApi;
+                String appendStr="Being Salt: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+        mixed_spice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":s#9";
+                globalvalue=globalvalue+oilApi;
+                String appendStr="Being Mixed spice: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+        ch_pot_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":s#7";
+                globalvalue=globalvalue+oilApi;
+
+                String appendStr="Being CH/PO/OT: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
+        spud_grinding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oilApi=":t*1";
+                globalvalue=globalvalue+oilApi;
+                String appendStr="Spud Grinding: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+            }
+        });
 
 
         bluetoothIn = new Handler() {
@@ -94,39 +246,6 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
 
             }
         };
-        seekBar = (SeekBar) findViewById(R.id.seekbar1);
-        seekValue = (TextView) findViewById(R.id.showSeekValue);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progress = 0;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                progress = progresValue;
-                //Log.d(TAG, "borhan1 " + progresValue);
-
-                seekValue.setText(progresValue + "");
-                String str = "V!" + progresValue + "\n";
-                mConnectedThread.write(str);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //textView.setText("Covered: " + progress + "/" + seekBar.getMax());
-                //Log.d(TAG, "borhan3 " + seekBar.getMax());
-                //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
-            }
-        });
-        readSerialData = (TextView) findViewById(R.id.readSerialData);
-
-        //apiText= (EditText) findViewById(R.id.apitext);
-        //btnOn = (Button) findViewById(R.id.buttonOn);
-        //btnOff = (Button) findViewById(R.id.buttonOff);
-
 
         readSerialData = (TextView) findViewById(R.id.readSerialData);
 
