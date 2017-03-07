@@ -42,33 +42,18 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     private String TAG = "borhan";
 
     private static final int MESH_PORT = 1166;
-
-    private Button configure, send_temp;
     private static String address;
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private RecipeActivity.ConnectedThread mConnectedThread;
     final int handlerState = 0;
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    //Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
-    //Button  chicken,beef,rice,noodles,poteto,salad;
-    TextView txtArduino, txtString, txtStringLength, sensorView0, readSerialData, seekValue;
+    TextView readSerialData;
     Handler bluetoothIn;
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
     int dataLength;
-    private String globalTemp = "";
-    long millisecondMe = 0;
-    int refreshTime = 5000;
-    private long previousRuntime = 0L;
-    private final long TIME_DELAY = 5000L;
-
-    private List<RecipeModel> recipeList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private RecipeAdapter mAdapter;
     DBHandler db = new DBHandler(this);
-
-    private SeekBar seekBar;
     Dialog dialog = null;
     TextView show_recipe_status = null,selected_option;
     private Button ovenOn,ovenOff,oil,water,onion,chili,salt,mixed_spice,ch_pot_other,spud_grinding,create;
@@ -100,9 +85,9 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ed_text = recipeName.getText().toString().trim();
+                String recipename_text = recipeName.getText().toString().trim();
 
-                if(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null)
+                if(recipename_text.isEmpty() || recipename_text.length() == 0 || recipename_text.equals("") || recipename_text == null)
                 {
                     //EditText is empty
                     Toast.makeText(context,"Recipe name could not be empty",Toast.LENGTH_LONG).show();
@@ -110,7 +95,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 else
                 {
 
-                    db.addRecipe(new RecipeModel(1, ed_text, globalvalue));
+                    db.addRecipe(new RecipeModel(1, recipename_text, globalvalue));
                     Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
                     //EditText is not empty
                     Log.d(TAG,"c "+globalvalue);
