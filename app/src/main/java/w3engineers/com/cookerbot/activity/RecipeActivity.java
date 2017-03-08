@@ -58,12 +58,36 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     TextView show_recipe_status = null,selected_option;
     private Button ovenOn,ovenOff,oil,water,onion,chili,salt,mixed_spice,ch_pot_other,spud_grinding,create;
     private String globalvalue="", setStr="";
-    private TextView recipeName;
+    private TextView recipeName, time;
     private Context context;
+    long startTime = 0;
+    long globalSecond=0;
+    long previousGlobalSecond=0;
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+            globalSecond++;
+            time.setText(String.format("%d:%02d", minutes, seconds));
+            Log.d(TAG,String.format("%2d:%02d", minutes, seconds)+ "  "+globalSecond);
+
+            timerHandler.postDelayed(this, 1000);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+        time = (TextView)findViewById(R.id.time);
+        startTime = System.currentTimeMillis();
+        timerHandler.postDelayed(timerRunnable, 0);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = this;
@@ -108,8 +132,12 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         ovenOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ovenOnApi=":b=1";
 
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                //String ovenOnApi=":d`"+currentSecond+":b=1";
+                String ovenOnApi=":b=1";
+                Log.d(TAG,""+ovenOnApi);
                 globalvalue=globalvalue+ovenOnApi;
                 String appendStr="Oven On: ";
                 setStr = setStr+appendStr;
@@ -120,8 +148,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         ovenOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String ovenOffApiStore=":d`"+currentSecond+":b-1";
                 String ovenOffApi=":b-1";
-                globalvalue=globalvalue+ovenOffApi;
+                globalvalue=globalvalue+ovenOffApiStore;
                 String appendStr="Oven Off: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
@@ -132,8 +163,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         oil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-5)+":o+5";
                 String oilApi=":o+5";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
 
                 String appendStr="Being Oil: ";
                 setStr = setStr+appendStr;
@@ -144,9 +178,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         water.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-1)+":w^1";
                 String oilApi=":w^1";
-                globalvalue=globalvalue+oilApi;
-
+                globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Water: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
@@ -157,8 +193,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         onion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-2)+":s#1";
                 String oilApi=":s#1";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
 
                 String appendStr="Being Onion: ";
                 setStr = setStr+appendStr;
@@ -169,8 +208,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         chili.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-2)+":s#2";
                 String oilApi=":s#2";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Chili: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
@@ -180,8 +222,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         salt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-2)+":s#3";
                 String oilApi=":s#3";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Salt: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
@@ -191,8 +236,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         mixed_spice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-2)+":s#9";
                 String oilApi=":s#9";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Mixed spice: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
@@ -202,8 +250,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         ch_pot_other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-2)+":s#7";
                 String oilApi=":s#7";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
 
                 String appendStr="Being CH/PO/OT: ";
                 setStr = setStr+appendStr;
@@ -214,8 +265,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         spud_grinding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-12)+":t*1";
                 String oilApi=":t*1";
-                globalvalue=globalvalue+oilApi;
+                globalvalue=globalvalue+oilApiStore;
                 String appendStr="Spud Grinding: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);

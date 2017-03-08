@@ -67,12 +67,35 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private SeekBar seekBar;
     Dialog dialog = null;
     TextView show_recipe_status = null;
-    Context context;
+    TextView time;
+    private Context context;
+    long startTime = 0;
+    long globalSecond=0;
+    long previousGlobalSecond=0;
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+            globalSecond++;
+            time.setText(String.format("%d:%02d", minutes, seconds));
+            Log.d(TAG,String.format("%2d:%02d", minutes, seconds)+ "  "+globalSecond);
+
+            timerHandler.postDelayed(this, 1000);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_io_t);
         context = this;
+        time = (TextView)findViewById(R.id.time);
+        startTime = System.currentTimeMillis();
+        timerHandler.postDelayed(timerRunnable, 0);
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -329,7 +352,9 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     @Override
     public void back(int id, final String name, final String api) {
 
-        final String str = name+":b=1:"+api +":b-1"+ "\n";
+        //final String str = name+":b=1:"+api +":b-1"+ "\n";
+
+        final String str = name+api +"\n";
         Log.d("borhan", str);
 
         dialog = new Dialog(this);

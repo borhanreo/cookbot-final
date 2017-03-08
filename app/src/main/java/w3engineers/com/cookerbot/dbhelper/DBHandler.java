@@ -45,7 +45,7 @@ public class DBHandler extends SQLiteOpenHelper {
         initialValuesPotatoFry.put(RECIPE_NAME, "System Potato Fry");
         initialValuesPotatoFry.put(RECIPE_API, PotatoFryApi); //Vegetable cooking
 
-        String VagetableApi="o+10:t*120:s#1:s#2:s#9:s#7:w^10:t*600";
+        String VagetableApi="o+10:t*120:s#1:s#2:s#9:s#7:w^8:t*2400";
         ContentValues initialValuesVagetableFry = new ContentValues();
         initialValuesVagetableFry.put(RECIPE_NAME, "System Vegetable Papaya cooking");
         initialValuesVagetableFry.put(RECIPE_API, VagetableApi);
