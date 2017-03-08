@@ -63,6 +63,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     long startTime = 0;
     long globalSecond=0;
     long previousGlobalSecond=0;
+    long lastSecond=0;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
@@ -237,8 +238,8 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             @Override
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
-                previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-2)+":s#9";
+                previousGlobalSecond = globalSecond-2;
+                String oilApiStore=":d`"+(currentSecond)+":s#9";
                 String oilApi=":s#9";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Mixed spice: ";
@@ -251,8 +252,8 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             @Override
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
-                previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-2)+":s#7";
+                previousGlobalSecond = globalSecond-2;
+                String oilApiStore=":d`"+(currentSecond)+":s#7";
                 String oilApi=":s#7";
                 globalvalue=globalvalue+oilApiStore;
 
@@ -266,8 +267,8 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             @Override
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
-                previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-12)+":t*1";
+                previousGlobalSecond = globalSecond-12;
+                String oilApiStore=":d`"+(currentSecond)+":t*1";
                 String oilApi=":t*1";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Spud Grinding: ";
@@ -457,6 +458,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     @Override
     public void onPause() {
         super.onPause();
+        timerHandler.removeCallbacks(timerRunnable);
         try {
             //Don't leave Bluetooth sockets open when leaving activity
             btSocket.close();

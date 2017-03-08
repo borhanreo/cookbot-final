@@ -327,6 +327,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     @Override
     public void onPause() {
         super.onPause();
+        timerHandler.removeCallbacks(timerRunnable);
         try {
             //Don't leave Bluetooth sockets open when leaving activity
             btSocket.close();
