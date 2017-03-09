@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
              Intent intent = new Intent(MainActivity.this,RecipeList.class);
              startActivity(intent);
          }
+         else if (id == R.id.nav_recipe_map) {
+             Intent intent = new Intent(MainActivity.this,GradientsMapActivity.class);
+             startActivity(intent);
+         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -16,6 +16,11 @@
             android:icon="@drawable/logo"
             android:title="Recipe List" />
 
+        <item
+            android:id="@+id/nav_recipe_map"
+            android:icon="@drawable/logo"
+            android:title="Recipe Gradients Map" />
+
     </group>
     <item android:title="Communicate">
         <menu>
