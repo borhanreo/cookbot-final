@@ -166,7 +166,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
                 previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-5)+":o+5";
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":o+5";
                 String oilApi=":o+5";
                 globalvalue=globalvalue+oilApiStore;
 
@@ -174,6 +174,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=5;
             }
         });
         water.setOnClickListener(new View.OnClickListener() {
@@ -181,13 +182,14 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
                 previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-1)+":w^1";
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":w^1";
                 String oilApi=":w^1";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Water: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=1;
             }
         });
 
@@ -196,7 +198,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
                 previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-2)+":s#1";
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":s#1";
                 String oilApi=":s#1";
                 globalvalue=globalvalue+oilApiStore;
 
@@ -211,13 +213,14 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
                 previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-2)+":s#2";
+                String oilApiStore=":d`"+(currentSecond)+":s#2";
                 String oilApi=":s#2";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Chili: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=2;
             }
         });
         salt.setOnClickListener(new View.OnClickListener() {
@@ -225,35 +228,37 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
                 previousGlobalSecond = globalSecond;
-                String oilApiStore=":d`"+(currentSecond-2)+":s#3";
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":s#3";
                 String oilApi=":s#3";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Salt: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=2;
             }
         });
         mixed_spice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
-                previousGlobalSecond = globalSecond-2;
-                String oilApiStore=":d`"+(currentSecond)+":s#9";
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":s#9";
                 String oilApi=":s#9";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Being Mixed spice: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=2;
             }
         });
         ch_pot_other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
-                previousGlobalSecond = globalSecond-2;
-                String oilApiStore=":d`"+(currentSecond)+":s#7";
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":s#7";
                 String oilApi=":s#7";
                 globalvalue=globalvalue+oilApiStore;
 
@@ -261,20 +266,23 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=2;
+
             }
         });
         spud_grinding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
-                previousGlobalSecond = globalSecond-12;
-                String oilApiStore=":d`"+(currentSecond)+":t*1";
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":t*1";
                 String oilApi=":t*1";
                 globalvalue=globalvalue+oilApiStore;
                 String appendStr="Spud Grinding: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=12;
             }
         });
 
