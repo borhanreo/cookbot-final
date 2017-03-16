@@ -55,6 +55,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         prepareRecipeModelData();
+
     }
     private void prepareRecipeModelData() {
         List<RecipeModel> recipeModels = db.getAllRecipe();
