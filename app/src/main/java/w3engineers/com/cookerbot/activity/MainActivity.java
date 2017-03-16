@@ -16,10 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-;
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
 import w3engineers.com.cookerbot.fragment.GameFragment;
+import w3engineers.com.cookerbot.model.Box;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private GameFragment fragment;

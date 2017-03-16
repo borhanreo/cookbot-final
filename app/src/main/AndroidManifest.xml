@@ -42,12 +42,13 @@
         <activity
             android:name=".activity.RecipeActivity"
             android:label="@string/title_activity_recipe"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.GradientsMapActivity"
             android:label="@string/title_activity_gradients_map"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

@@ -15,4 +15,9 @@
         android:text="Star Recipe Map"
         android:onClick="QrScanner"
         android:layout_marginTop="50dp"/>
+    <ImageView
+        android:id="@+id/ImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </RelativeLayout>

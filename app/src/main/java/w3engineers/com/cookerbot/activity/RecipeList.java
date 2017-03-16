@@ -73,7 +73,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
     }
     @Override
     public void back(int id, String name, String api) {
-        Log.d(TAG," borhan "+api);
+        Log.d(TAG," borhan "+name+api);
         final int rId = id;
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
