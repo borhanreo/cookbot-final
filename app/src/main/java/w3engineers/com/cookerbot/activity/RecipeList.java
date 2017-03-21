@@ -82,7 +82,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
-                        if(rId<=4)
+                        if(rId<=10)
                         {
                             Toast.makeText(context,"You could not delete system recipe",Toast.LENGTH_LONG).show();
                         }else
