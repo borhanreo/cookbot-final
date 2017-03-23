@@ -2,6 +2,7 @@ package w3engineers.com.cookerbot.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -60,8 +61,9 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
     private void prepareRecipeModelData() {
         List<RecipeModel> recipeModels = db.getAllRecipe();
         for (RecipeModel recipeModel : recipeModels) {
-            recipeModel = new RecipeModel(recipeModel.getId(), recipeModel.getRecipe_name(), recipeModel.getRecipe_api());
+            recipeModel = new RecipeModel(recipeModel.getId(), recipeModel.getRecipe_name(), recipeModel.getRecipe_api(),recipeModel.getRecipe_gradients_list());
             recipeList.add(recipeModel);
+            //Log.d(TAG," borhan "+ recipeModel.getRecipe_gradients_list());
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -76,6 +78,11 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
     public void back(int id, String name, String api) {
         Log.d(TAG," borhan "+name+api);
         final int rId = id;
+        Intent intent = new Intent(this,ShowRecipeActivity.class);
+        intent.putExtra("api",api);
+        intent.putExtra("name",name);
+        intent.putExtra("id",id);
+        startActivity(intent);
 
         /*DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override

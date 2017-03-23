@@ -162,7 +162,7 @@ public class NewRecipe extends AppCompatActivity {
 
                     String recipeNameStr = recipe_name.getText().toString();
                     globStr = recipeNameStr + globStr;
-                    db.addRecipe(new RecipeModel(1, recipeNameStr, globStr));
+                    db.addRecipe(new RecipeModel(1, recipeNameStr, globStr,""));
                     Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
                     resetRecipe();
                     finish();

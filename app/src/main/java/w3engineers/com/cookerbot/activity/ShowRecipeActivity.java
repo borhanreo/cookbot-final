@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import w3engineers.com.advancedjmesh.R;
+import w3engineers.com.cookerbot.R;
+
 
 public class ShowRecipeActivity extends AppCompatActivity {
 

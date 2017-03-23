@@ -120,7 +120,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 else
                 {
 
-                    db.addRecipe(new RecipeModel(1, recipename_text, globalvalue));
+                    db.addRecipe(new RecipeModel(1, recipename_text, globalvalue,"demo text"));
                     Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
                     //EditText is not empty
                     Log.d(TAG,"c "+globalvalue);

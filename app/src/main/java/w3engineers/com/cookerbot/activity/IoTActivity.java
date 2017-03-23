@@ -217,7 +217,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private void prepareRecipeModelData() {
         List<RecipeModel> recipeModels = db.getAllRecipe();
         for (RecipeModel recipeModel : recipeModels) {
-            recipeModel = new RecipeModel(recipeModel.getId(), recipeModel.getRecipe_name(), recipeModel.getRecipe_api());
+            recipeModel = new RecipeModel(recipeModel.getId(), recipeModel.getRecipe_name(), recipeModel.getRecipe_api(),recipeModel.getRecipe_gradients_list());
             recipeList.add(recipeModel);
         }
         mAdapter.notifyDataSetChanged();
