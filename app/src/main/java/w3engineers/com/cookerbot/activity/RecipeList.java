@@ -77,7 +77,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
         Log.d(TAG," borhan "+name+api);
         final int rId = id;
 
-        /*DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
@@ -104,7 +104,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure want to delete this recipe?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();*/
+                .setNegativeButton("No", dialogClickListener).show();
 
 
     }
