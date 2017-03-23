@@ -54,6 +54,7 @@
     <string name="title_activity_recipe_list">RecipeList</string>
     <string name="title_activity_recipe">RecipeActivity</string>
     <string name="title_activity_gradients_map">GradientsMapActivity</string>
+    <string name="title_activity_show_recipe">ShowRecipeActivity</string>
 
 </resources>
 
