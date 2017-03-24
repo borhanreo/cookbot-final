@@ -351,7 +351,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     }
 
     @Override
-    public void back(int id, final String name, final String api) {
+    public void back(int id, final String name, final String api, String gradients_list) {
 
         //final String str = name+":b=1:"+api +":b-1"+ "\n";
 

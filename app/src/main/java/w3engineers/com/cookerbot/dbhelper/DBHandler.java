@@ -202,6 +202,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(RECIPE_NAME, recipeModel.getRecipe_name());
         values.put(RECIPE_API, recipeModel.getRecipe_api());
+        values.put(RECIPE_GRADIENTS_LIST, recipeModel.getRecipe_gradients_list());
         db.insert(TABLE_RECIPE, null, values);
         db.close();
     }

@@ -298,7 +298,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="20dp">
-
+        <EditText
+            android:id="@+id/gradients_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"/>
         <TextView
             android:id="@+id/readSerialData"
             android:layout_width="match_parent"

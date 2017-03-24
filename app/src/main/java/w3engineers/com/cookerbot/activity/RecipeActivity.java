@@ -59,6 +59,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     private Button ovenOn,ovenOff,oil,water,onion,chili,salt,mixed_spice,ch_pot_other,spud_grinding,create;
     private String globalvalue="", setStr="";
     private TextView recipeName, time;
+    private EditText gradients_list;
     private Context context;
     long startTime = 0;
     long globalSecond=0;
@@ -75,7 +76,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             seconds = seconds % 60;
             globalSecond++;
             time.setText(String.format("%d:%02d", minutes, seconds));
-            Log.d(TAG,String.format("%2d:%02d", minutes, seconds)+ "  "+globalSecond);
+            //Log.d(TAG,String.format("%2d:%02d", minutes, seconds)+ "  "+globalSecond);
 
             timerHandler.postDelayed(this, 1000);
         }
@@ -106,12 +107,13 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
 
         selected_option= (TextView) findViewById(R.id.selected_option);
         recipeName = (EditText) findViewById(R.id.recipe_name);
+        gradients_list = (EditText) findViewById(R.id.gradients_list);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String recipename_text = recipeName.getText().toString().trim();
-
+                String gradients_list_str = gradients_list.getText().toString();
                 if(recipename_text.isEmpty() || recipename_text.length() == 0 || recipename_text.equals("") || recipename_text == null)
                 {
                     //EditText is empty
@@ -119,11 +121,11 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 }
                 else
                 {
-
-                    db.addRecipe(new RecipeModel(1, recipename_text, globalvalue,"demo text"));
+                    Toast.makeText(context,gradients_list_str,Toast.LENGTH_LONG).show();
+                    db.addRecipe(new RecipeModel(1, recipename_text, globalvalue,gradients_list_str));
                     Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
                     //EditText is not empty
-                    Log.d(TAG,"c "+globalvalue);
+                    //Log.d(TAG,"c "+globalvalue);
                     globalvalue = "";
                 }
 
@@ -490,7 +492,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     }
 
     @Override
-    public void back(int id, String name, String api) {
+    public void back(int id, String name, String api, String gradients_list) {
 
     }
 }

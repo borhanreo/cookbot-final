@@ -24,13 +24,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     private OnItemSelectCallBackListener onItemSelectCallBackListener =null;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView keyId, recipeName, recipeApi;
+        public TextView keyId, recipeName, recipeApi,recipeGradientsList;
 
         public MyViewHolder(View view) {
             super(view);
             keyId = (TextView) view.findViewById(R.id.key_id);
             recipeApi = (TextView) view.findViewById(R.id.recipeName);
             recipeName = (TextView) view.findViewById(R.id.recipeApi);
+            recipeGradientsList = (TextView) view.findViewById(R.id.recipeGradientsList);
         }
     }
 
@@ -65,7 +66,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
                 TextView recipeId = (TextView) view.findViewById(R.id.key_id);
                 TextView recipeName = (TextView) view.findViewById(R.id.recipeName);
                 TextView recipeApi = (TextView) view.findViewById(R.id.recipeApi);
-                onItemSelectCallBackListener.back(Integer.parseInt(recipeId.getText().toString()),recipeName.getText().toString(),recipeApi.getText().toString());
+                TextView recipeGradientsList = (TextView) view.findViewById(R.id.recipeGradientsList);
+                onItemSelectCallBackListener.back(Integer.parseInt(recipeId.getText().toString()),recipeName.getText().toString(),recipeApi.getText().toString(),recipeGradientsList.getText().toString());
 
             }
         });
@@ -80,6 +82,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         holder.keyId.setText(recipeModel.getId()+"");
         holder.recipeApi.setText(recipeModel.getRecipe_name());
         holder.recipeName.setText(recipeModel.getRecipe_api());
+        holder.recipeGradientsList.setText(recipeModel.getRecipe_gradients_list());
     }
 
     @Override
