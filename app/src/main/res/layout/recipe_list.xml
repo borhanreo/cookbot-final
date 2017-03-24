@@ -32,7 +32,8 @@
         android:id="@+id/recipeGradientsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AA"/>
+        android:text="AA"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/recipeApi"
         android:textColor="@color/year"

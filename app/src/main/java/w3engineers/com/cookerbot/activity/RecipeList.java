@@ -76,12 +76,13 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
     }
     @Override
     public void back(int id, String name, String api, String gradients_list) {
-        Log.d(TAG," borhan "+name+api);
+        //Log.d(TAG," borhan "+name+api+ gradients_list);
         final int rId = id;
         Intent intent = new Intent(this,ShowRecipeActivity.class);
         intent.putExtra("api",api);
         intent.putExtra("name",name);
         intent.putExtra("id",id);
+        intent.putExtra("gradients_list",gradients_list);
         startActivity(intent);
 
         /*DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

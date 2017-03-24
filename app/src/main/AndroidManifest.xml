@@ -53,6 +53,10 @@
         <activity
             android:name=".activity.ShowRecipeActivity"
             android:label="@string/title_activity_show_recipe"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RecipeDetailsActivity"
+            android:label="@string/title_activity_recipe_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
