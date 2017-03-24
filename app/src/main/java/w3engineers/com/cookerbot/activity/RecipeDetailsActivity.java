@@ -28,20 +28,22 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
     private String  gradients_list=null,api=null,name=null,id=null;
     private TextView rid;
     private EditText tv_gradients;
-    private Button update;
 
     private List<RecipeDetailsModel> recipeList = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecipeShowingAdapter mAdapter;
-
+    private EditText recipe_gradients_list;
+    private TextView r_id;
+    private Button update;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        recipe_gradients_list = (EditText) findViewById(R.id.recipe_gradients_list);
+        rid = (TextView)findViewById(R.id.r_id);
+        update = (Button)findViewById(R.id.update);
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -50,11 +52,13 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
             name = extras.getString("name");
             id = extras.getString("id");
             this.setTitle(name);
-
+            recipe_gradients_list.setText(gradients_list);
+            rid.setText(id);
         }
-        rid = (TextView)findViewById(R.id.r_id);
-        tv_gradients = (EditText)findViewById(R.id.recipe_gradients_list);
-        update = (Button)findViewById(R.id.update);
+
+
+
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mAdapter = new RecipeShowingAdapter(recipeList, this);
