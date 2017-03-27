@@ -7,11 +7,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 import w3engineers.com.cookerbot.R;
+import w3engineers.com.cookerbot.dbhelper.DBHandler;
+import w3engineers.com.cookerbot.model.RecipeModel;
 
 
 public class ShowRecipeActivity extends AppCompatActivity {
@@ -19,7 +24,7 @@ public class ShowRecipeActivity extends AppCompatActivity {
     private String gradients_list = null, api = null, name = null, id = null;
     private Button details;
     private Context context;
-
+    private DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,22 +32,32 @@ public class ShowRecipeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = this;
+        dbHandler=new DBHandler(this);
         gradients = (TextView) findViewById(R.id.gradients);
         details = (Button) findViewById(R.id.details);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            /*intent.putExtra("api",api);
-            intent.putExtra("name",name);
-            intent.putExtra("id",id);
-            intent.putExtra("gradients_list",gradients_list);*/
+
+            id = extras.getString("id");
             gradients_list = extras.getString("gradients_list");
             api = extras.getString("api");
             name = extras.getString("name");
-            id = extras.getString("id");
+
+            Log.d("borhan","idd"+id+"  "+name);
             gradients.setText(gradients_list);
             this.setTitle(name);
 
         }
+
+        /*List<RecipeModel> recipeModels = dbHandler.getAllRecipeByID(Long.parseLong(id));
+        for (RecipeModel recipeModel : recipeModels) {
+            gradients_list = recipeModel.getRecipe_gradients_list();
+            api = recipeModel.getRecipe_api();
+            name = recipeModel.getRecipe_name();
+            gradients.setText(gradients_list);
+            this.setTitle(name);
+        }*/
+
         details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

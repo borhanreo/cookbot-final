@@ -77,8 +77,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RecipeModel recipeModel = recipeList.get(position);
-        Log.d(TAG,"borhan"+recipeModel.getId());
-        Log.d(TAG,"borhan "+holder.keyId);
         holder.keyId.setText(recipeModel.getId()+"");
         holder.recipeApi.setText(recipeModel.getRecipe_name());
         holder.recipeName.setText(recipeModel.getRecipe_api());

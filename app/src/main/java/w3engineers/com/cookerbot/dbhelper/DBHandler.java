@@ -220,10 +220,8 @@ public class DBHandler extends SQLiteOpenHelper {
         return contact;
     }
 
-    // Getting All Shops
     public List<RecipeModel> getAllRecipe() {
         List<RecipeModel> shopList = new ArrayList<RecipeModel>();
-// Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_RECIPE;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -239,13 +237,38 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return shopList;
     }
-
+    public List<RecipeModel> getAllRecipeByID(long id) {
+        List<RecipeModel> shopList = new ArrayList<RecipeModel>();
+        String selectQuery = "SELECT * FROM " + TABLE_RECIPE+ " WHERE id="+id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                RecipeModel shop = new RecipeModel();
+                shop.setId(Integer.parseInt(cursor.getString(0)));
+                shop.setRecipeName(cursor.getString(1));
+                shop.setRecipeApi(cursor.getString(2));
+                shop.setRecipegradientsList(cursor.getString(3));
+                shopList.add(shop);
+            } while (cursor.moveToNext());
+        }
+        return shopList;
+    }
     public boolean DeleteData(int id) {
         String selectQuery = "DELETE * FROM " + TABLE_RECIPE +" WHERE id="+id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         return true;
+    }
+
+    public void update(int id, String api) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(RECIPE_API, api);
+        values.put(RECIPE_GRADIENTS_LIST, "");
+        db.update(TABLE_RECIPE,values,KEY_ID +" = '"+ id + "'",null);
+        db.close();
     }
     public void deleteSingleContact(String title){
 
