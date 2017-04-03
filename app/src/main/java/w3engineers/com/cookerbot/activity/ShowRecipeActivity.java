@@ -70,5 +70,18 @@ public class ShowRecipeActivity extends AppCompatActivity {
             }
         });
     }
+    public void loadApi()
+    {
+        List<RecipeModel> recipeModels = dbHandler.getAllRecipeByID(Integer.parseInt(id));
+
+        for (RecipeModel recipeModel : recipeModels) {
+            api = recipeModel.getRecipe_api();
+        }
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        loadApi();
+    }
 
 }

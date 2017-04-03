@@ -74,6 +74,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
             mAdapter.delete(i);
         }
     }
+
     @Override
     public void back(int id, String name, String api, String gradients_list) {
         Log.d(TAG," borhan "+name+api );
