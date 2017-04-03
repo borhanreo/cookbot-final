@@ -8,30 +8,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import w3engineers.com.cookerbot.R;
-import w3engineers.com.cookerbot.adapter.RecipeAdapter;
 import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
 import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.dbhelper.DBHandler;
@@ -153,8 +144,8 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
             public void onClick(View v) {
                 long currentSecond = globalSecond-previousGlobalSecond;
                 previousGlobalSecond = globalSecond;
-                String ovenOffApiStore=":d`"+currentSecond+":b-1";
-                String ovenOffApi=":b-1";
+                String ovenOffApiStore=":d`"+currentSecond+":b|1";
+                String ovenOffApi=":b|1";
                 globalvalue=globalvalue+ovenOffApiStore;
                 String appendStr="Oven Off: ";
                 setStr = setStr+appendStr;
