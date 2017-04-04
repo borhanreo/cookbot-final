@@ -81,7 +81,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
                     android:hint="Recipe Name" />
-
                 <!--<Button
                     android:id="@+id/reset"
                     android:layout_width="0dip"
