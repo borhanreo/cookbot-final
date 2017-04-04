@@ -262,11 +262,11 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public void update(int id, String api) {
+    public void update(int id, String api,String lst) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(RECIPE_API, api);
-        values.put(RECIPE_GRADIENTS_LIST, "");
+        values.put(RECIPE_GRADIENTS_LIST, lst);
         db.update(TABLE_RECIPE,values,KEY_ID +" = '"+ id + "'",null);
         db.close();
     }

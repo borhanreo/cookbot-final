@@ -26,6 +26,7 @@ import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.controller.OnItemValueChangeListener;
 import w3engineers.com.cookerbot.dbhelper.DBHandler;
 import w3engineers.com.cookerbot.model.RecipeDetailsModel;
+import w3engineers.com.cookerbot.model.RecipeModel;
 
 
 public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSelectCallBackListener, OnItemValueChangeListener {
@@ -80,6 +81,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
             @Override
             public void onClick(View v) {
                 //Log.d(TAG, String.valueOf(mAdapter.getItemId(3)));
+                String rDetails = recipe_gradients_list.getText().toString();
                 int counter = mAdapter.getSize();
                 String hardwareApi="";
                 for(int i=0;i<=counter-1;i++)
@@ -89,10 +91,9 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
                     int tp = item.getAction_type();
                     hardwareApi=hardwareApi+":"+projectCommon.getGradients(tp)+item.getAction_value();
 
-
                 }
                 Log.d(TAG," "+hardwareApi);
-                dbHandler.update(Integer.parseInt(id),hardwareApi);
+                dbHandler.update(Integer.parseInt(id),hardwareApi,rDetails);
                 finish();
 
                 //mAdapter=aditableAdapter;
@@ -256,5 +257,21 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
         Log.d(TAG, " value " + position + " " + value + "   " + item.getAction_value());
         mAdapter.updateItem(position, item);
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void loadApi()
+    {
+        List<RecipeModel> recipeModels = dbHandler.getAllRecipeByID(Integer.parseInt(id));
+
+        for (RecipeModel recipeModel : recipeModels) {
+            api = recipeModel.getRecipe_api();
+            gradients_list= recipeModel.getRecipe_gradients_list();
+            recipe_gradients_list.setText(gradients_list);
+        }
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        loadApi();
     }
 }

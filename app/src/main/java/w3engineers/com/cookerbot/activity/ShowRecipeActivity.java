@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class ShowRecipeActivity extends AppCompatActivity {
     private Button details;
     private Context context;
     private DBHandler dbHandler;
+    private EditText recipe_gradients_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class ShowRecipeActivity extends AppCompatActivity {
         dbHandler=new DBHandler(this);
         gradients = (TextView) findViewById(R.id.gradients);
         details = (Button) findViewById(R.id.details);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
@@ -81,6 +84,8 @@ public class ShowRecipeActivity extends AppCompatActivity {
 
         for (RecipeModel recipeModel : recipeModels) {
             api = recipeModel.getRecipe_api();
+            gradients_list = recipeModel.getRecipe_gradients_list();
+            gradients.setText(gradients_list);
         }
     }
     @Override
