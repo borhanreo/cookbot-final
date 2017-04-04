@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import w3engineers.com.cookerbot.R;
+import w3engineers.com.cookerbot.controller.OnItemLongClickCallBackListener;
 import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.model.RecipeModel;
 
@@ -22,6 +23,7 @@ import static android.content.ContentValues.TAG;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHolder> {
     private List<RecipeModel> recipeList;
     private OnItemSelectCallBackListener onItemSelectCallBackListener =null;
+    private OnItemLongClickCallBackListener  onItemLongClickCallBackListener =null;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView keyId, recipeName, recipeApi,recipeGradientsList;
@@ -36,9 +38,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     }
 
 
-    public RecipeAdapter(List<RecipeModel> moviesList, OnItemSelectCallBackListener onItemSelectCallBackListener) {
+    public RecipeAdapter(List<RecipeModel> moviesList, OnItemSelectCallBackListener onItemSelectCallBackListener, OnItemLongClickCallBackListener onItemLongClickCallBackListener) {
         this.recipeList = moviesList;
         this.onItemSelectCallBackListener = onItemSelectCallBackListener;
+        this.onItemLongClickCallBackListener = onItemLongClickCallBackListener;
     }
     public void delete(int position){
         recipeList.remove(position);
@@ -69,6 +72,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
                 TextView recipeGradientsList = (TextView) view.findViewById(R.id.recipeGradientsList);
                 onItemSelectCallBackListener.back(Integer.parseInt(recipeId.getText().toString()),recipeName.getText().toString(),recipeApi.getText().toString(),recipeGradientsList.getText().toString());
 
+            }
+        });
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                TextView recipeId = (TextView) v.findViewById(R.id.key_id);
+                TextView recipeName = (TextView) v.findViewById(R.id.recipeName);
+                TextView recipeApi = (TextView) v.findViewById(R.id.recipeApi);
+                TextView recipeGradientsList = (TextView) v.findViewById(R.id.recipeGradientsList);
+                onItemLongClickCallBackListener.backLong(Integer.parseInt(recipeId.getText().toString()),recipeName.getText().toString(),recipeApi.getText().toString(),recipeGradientsList.getText().toString());
+
+
+                return false;
             }
         });
 

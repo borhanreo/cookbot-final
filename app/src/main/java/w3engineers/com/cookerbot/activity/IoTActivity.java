@@ -30,11 +30,12 @@ import java.util.UUID;
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.adapter.RecipeAdapter;
 import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
+import w3engineers.com.cookerbot.controller.OnItemLongClickCallBackListener;
 import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.dbhelper.DBHandler;
 import w3engineers.com.cookerbot.model.RecipeModel;
 
-public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBackListener {
+public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBackListener,OnItemLongClickCallBackListener {
     private String TAG = "borhan";
 
     private static final int MESH_PORT = 1166;
@@ -202,7 +203,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new RecipeAdapter(recipeList, this);
+        mAdapter = new RecipeAdapter(recipeList, this,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -273,6 +274,11 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
         mConnectedThread = new ConnectedThread(btSocket);
         mConnectedThread.start();
         mConnectedThread.write("x");
+    }
+
+    @Override
+    public void backLong(int id, String name, String api, String gradients_list) {
+
     }
 
 

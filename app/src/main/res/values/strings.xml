@@ -57,6 +57,10 @@
     <string name="title_activity_show_recipe">ShowRecipeActivity</string>
     <string name="title_activity_recipe_details">RecipeDetailsActivity</string>
 
+
+    <string name="delete">Delete</string>
+
+
 </resources>
 
 

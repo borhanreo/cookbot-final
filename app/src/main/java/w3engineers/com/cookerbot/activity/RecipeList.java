@@ -24,12 +24,13 @@ import java.util.List;
 
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.adapter.RecipeAdapter;
+import w3engineers.com.cookerbot.controller.OnItemLongClickCallBackListener;
 import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.dbhelper.DBHandler;
 import w3engineers.com.cookerbot.model.RecipeModel;
 
 
-public class RecipeList extends AppCompatActivity implements OnItemSelectCallBackListener{
+public class RecipeList extends AppCompatActivity implements OnItemSelectCallBackListener, OnItemLongClickCallBackListener{
     private String TAG="borhan";
     private Context context;
     private List<RecipeModel> recipeList = new ArrayList<>();
@@ -53,7 +54,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
             }
         });
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mAdapter = new RecipeAdapter(recipeList, this);
+        mAdapter = new RecipeAdapter(recipeList, this,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -81,7 +82,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.recipe_list_setting, menu);
         return true;
     }
 
@@ -113,7 +114,15 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
         intent.putExtra("gradients_list",gradients_list);
         startActivity(intent);
 
-        /*DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+
+
+
+    }
+
+    @Override
+    public void backLong(int id, String name, String api, String gradients_list) {
+        final int rId = id;
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
@@ -140,8 +149,6 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure want to delete this recipe?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();*/
-
-
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }
