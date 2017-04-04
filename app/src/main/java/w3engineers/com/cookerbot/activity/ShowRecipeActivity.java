@@ -2,6 +2,7 @@ package w3engineers.com.cookerbot.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,6 +48,10 @@ public class ShowRecipeActivity extends AppCompatActivity {
             gradients.setText(gradients_list);
             this.setTitle(name);
 
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
         /*List<RecipeModel> recipeModels = dbHandler.getAllRecipeByID(Long.parseLong(id));

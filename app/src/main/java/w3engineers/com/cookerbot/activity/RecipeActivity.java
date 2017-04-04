@@ -6,6 +6,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -100,6 +102,10 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         recipeName = (EditText) findViewById(R.id.recipe_name);
         gradients_list = (EditText) findViewById(R.id.gradients_list);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +143,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+ovenOnApi+"\n");
+                //ovenOn.setBackgroundColor(Color.GREEN );
             }
         });
         ovenOff.setOnClickListener(new View.OnClickListener() {
