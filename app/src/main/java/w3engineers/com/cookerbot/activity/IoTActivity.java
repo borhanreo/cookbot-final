@@ -36,7 +36,7 @@ import w3engineers.com.cookerbot.dbhelper.DBHandler;
 import w3engineers.com.cookerbot.model.RecipeModel;
 
 public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBackListener,OnItemLongClickCallBackListener {
-    private String TAG = "borhan";
+    private String TAG = "borhan IoTActivity";
 
     private static final int MESH_PORT = 1166;
 

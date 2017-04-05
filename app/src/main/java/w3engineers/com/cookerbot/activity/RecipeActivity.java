@@ -29,10 +29,11 @@ import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
 import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.dbhelper.DBHandler;
 import w3engineers.com.cookerbot.model.RecipeModel;
+import w3engineers.com.cookerbot.singleton.ProjectSingleton;
 
 
 public class RecipeActivity extends AppCompatActivity implements OnItemSelectCallBackListener {
-    private String TAG = "borhan";
+    private String TAG = "borhan RecipeActivity";
 
     private static final int MESH_PORT = 1166;
     private static String address;
@@ -81,11 +82,15 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         time = (TextView)findViewById(R.id.time);
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
+        context = this;
+        Intent intent = getIntent();
+        address = intent.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+        ProjectSingleton.getInstance(context).setAddress(address);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        context = this;
+
         ovenOn = (Button)findViewById(R.id.on);
         ovenOff = (Button)findViewById(R.id.off);
         oil = (Button)findViewById(R.id.oil);
@@ -389,8 +394,35 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     }
 
     private void getDeviceAddress() {
-        Intent intent = getIntent();
-        address = intent.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+        //Intent intent = getIntent();
+        //address = intent.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+        connectbt();
+        /*address = ProjectSingleton.getInstance(context).getAddress();
+        BluetoothDevice device = btAdapter.getRemoteDevice(address);
+        Log.d(TAG, " address " + device.getAddress());
+        try {
+            btSocket = createBluetoothSocket(device);
+        } catch (IOException e) {
+            Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_LONG).show();
+        }
+        try {
+            btSocket.connect();
+        } catch (IOException e) {
+            try {
+                btSocket.close();
+            } catch (IOException e2) {
+                //insert code to deal with this
+            }
+        }
+        mConnectedThread = new RecipeActivity.ConnectedThread(btSocket);
+        mConnectedThread.start();
+        mConnectedThread.write("x");*/
+
+    }
+
+    private void connectbt()
+    {
+        address = ProjectSingleton.getInstance(context).getAddress();
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
         Log.d(TAG, " address " + device.getAddress());
         try {
@@ -411,8 +443,6 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         mConnectedThread.start();
         mConnectedThread.write("x");
     }
-
-
 
 
     private class ConnectedThread extends Thread {
@@ -456,8 +486,10 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 mmOutStream.write(msgBuffer);                //write bytes over BT connection via outstream
             } catch (IOException e) {
                 //if you cannot write, close the application
-                Toast.makeText(getBaseContext(), "Connection Failure", Toast.LENGTH_LONG).show();
-                finish();
+
+                //Toast.makeText(getBaseContext(), "Connection Failure", Toast.LENGTH_LONG).show();
+                //finish();
+                connectbt();
 
             }
         }

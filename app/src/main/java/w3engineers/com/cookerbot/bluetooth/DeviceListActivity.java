@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ import w3engineers.com.cookerbot.activity.RecipeActivity;
 
 
 public class DeviceListActivity extends Activity {
-    private static final String TAG = "DeviceListActivity";
+    private static final String TAG = "borhan DeviceListActivity";
     private static final boolean D = true;
     private Context context;
 
@@ -42,7 +43,6 @@ public class DeviceListActivity extends Activity {
     private ArrayAdapter<String> mPairedDevicesArrayAdapter;
     EditText amount_oil;
     Spinner amount_heat;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,7 @@ public class DeviceListActivity extends Activity {
     public void onResume() {
         super.onResume();
         checkBTState();
+        //relativeLayout.setVisibility(View.GONE);
         textView1 = (TextView) findViewById(R.id.connecting);
         textView1.setTextSize(40);
         textView1.setText(" ");
@@ -81,7 +82,7 @@ public class DeviceListActivity extends Activity {
     // Set up on-click listener for the list (nicked this - unsure)
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
-            textView1.setText("Connecting...");
+
             // Get the device MAC address, which is the last 17 chars in the View
             String info = ((TextView) v).getText().toString();
             final String address = info.substring(info.length() - 17);
@@ -95,7 +96,7 @@ public class DeviceListActivity extends Activity {
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    textView1.setText("Connecting...");
                     String strValue = amount_heat.getSelectedItem().toString();
                     if (strValue.equals("Automatic")) {
                         Intent i = new Intent(DeviceListActivity.this, IoTActivity.class);
@@ -148,5 +149,10 @@ public class DeviceListActivity extends Activity {
 
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }
