@@ -7,7 +7,7 @@ import android.content.Context;
  */
 
 public class ProjectSingleton {
-    private static ProjectSingleton mySingleton= null;
+    private static ProjectSingleton projectSingleton = null;
     private Context context;
     private String address;
 
@@ -19,11 +19,11 @@ public class ProjectSingleton {
     }
     public static ProjectSingleton getInstance(Context context)
     {
-        if(mySingleton == null)
+        if(projectSingleton == null)
         {
-            mySingleton = new ProjectSingleton(context);
+            projectSingleton = new ProjectSingleton(context);
         }
-        return mySingleton;
+        return projectSingleton;
     }
     public String getAddress(){
         return this.address;
