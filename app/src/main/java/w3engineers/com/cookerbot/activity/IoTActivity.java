@@ -52,7 +52,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     //Button btnOn, btnOff,chicken,beef,rice,noodles,deviceOff,deviceOn,poteto,salad;
     //Button  chicken,beef,rice,noodles,poteto,salad;
-    TextView txtArduino, txtString, txtStringLength, sensorView0, readSerialData, seekValue;
+    TextView txtArduino, txtString, txtStringLength, sensorView0, readSerialData;//, seekValue;
     Handler bluetoothIn;
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
@@ -68,7 +68,7 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private RecipeAdapter mAdapter;
     DBHandler db = new DBHandler(this);
 
-    private SeekBar seekBar;
+    //private SeekBar seekBar;
     Dialog dialog = null;
     TextView show_recipe_status = null;
     TextView time;
@@ -108,9 +108,9 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
 
             }
         };
-        seekBar = (SeekBar) findViewById(R.id.seekbar1);
-        seekValue = (TextView) findViewById(R.id.showSeekValue);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        //seekBar = (SeekBar) findViewById(R.id.seekbar1);
+        //seekValue = (TextView) findViewById(R.id.showSeekValue);
+        /*seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progress = 0;
 
             @Override
@@ -134,17 +134,9 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
                 //Log.d(TAG, "borhan3 " + seekBar.getMax());
                 //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         readSerialData = (TextView) findViewById(R.id.readSerialData);
-
-        //apiText= (EditText) findViewById(R.id.apitext);
-        //btnOn = (Button) findViewById(R.id.buttonOn);
-        //btnOff = (Button) findViewById(R.id.buttonOff);
-
-
         readSerialData = (TextView) findViewById(R.id.readSerialData);
-
-
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == handlerState) {
