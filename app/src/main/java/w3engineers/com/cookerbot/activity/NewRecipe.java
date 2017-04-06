@@ -24,7 +24,7 @@ public class NewRecipe extends AppCompatActivity {
     final Context context = this;
     private Button Oilbutton, reset, WaterButton, spud_grinding, create, onion, chili, salt, mixed_spice, ch_po_ot, oven_heat;
     private String hardwareApiString = "", oilStr = "", waterStr = "", TAG = "borhan", spudGrindingStr = "", globStr = "",heatStr="", showText="";
-    EditText amount_oil, recipe_name;
+    EditText amount_oil, recipe_name,apiString;
     Spinner amount_heat;
     TextView selected_option;
     DBHandler db = new DBHandler(this);
@@ -53,6 +53,7 @@ public class NewRecipe extends AppCompatActivity {
         spud_grinding = (Button) findViewById(R.id.spud_grinding);
         create = (Button) findViewById(R.id.create);
         recipe_name = (EditText) findViewById(R.id.recipe_name);
+        apiString = (EditText) findViewById(R.id.apiString);
 
 
         onion = (Button) findViewById(R.id.onion);
@@ -158,11 +159,12 @@ public class NewRecipe extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String gradientsStr = apiString.getText().toString();
                 if (!isEmpty(recipe_name)) {
 
                     String recipeNameStr = recipe_name.getText().toString();
                     globStr = recipeNameStr + globStr;
-                    db.addRecipe(new RecipeModel(1, recipeNameStr, globStr,""));
+                    db.addRecipe(new RecipeModel(1, recipeNameStr, globStr,gradientsStr));
                     Toast.makeText(context, "Recipe successfully created ", Toast.LENGTH_LONG).show();
                     resetRecipe();
                     finish();

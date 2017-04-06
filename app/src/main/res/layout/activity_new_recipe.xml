@@ -256,5 +256,6 @@
         android:id="@+id/apiString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout4" />
+        android:layout_below="@id/layout4"
+        android:hint="Recipe Ingredients"/>
 </RelativeLayout>

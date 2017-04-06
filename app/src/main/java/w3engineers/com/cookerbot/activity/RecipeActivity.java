@@ -59,20 +59,26 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     long globalSecond=0;
     long previousGlobalSecond=0;
     long lastSecond=0;
+    boolean timerRun = true;
+    long currentPowerSecond=0, previousPowerSecond=0;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-            globalSecond++;
-            time.setText(String.format("%d:%02d", minutes, seconds));
-            //Log.d(TAG,String.format("%2d:%02d", minutes, seconds)+ "  "+globalSecond);
+            if(timerRun)
+            {
+                long millis = System.currentTimeMillis() - startTime;
+                //long millis = globalSecond-startTime;//System.currentTimeMillis() - startTime;
+                int seconds = (int) (millis / 1000);
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                globalSecond++;
+                time.setText(String.format("%d:%02d", minutes, seconds));
+                //Log.d(TAG,String.format("%2d:%02d", minutes, seconds)+ "  "+globalSecond);
+                timerHandler.postDelayed(this, 1000);
+            }
 
-            timerHandler.postDelayed(this, 1000);
         }
     };
     @Override
@@ -443,7 +449,32 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         mConnectedThread.start();
         mConnectedThread.write("x");
     }
+    private void connectbtWith(String input)
+    {
 
+        address = ProjectSingleton.getInstance(context).getAddress();
+        BluetoothDevice device = btAdapter.getRemoteDevice(address);
+        Log.d(TAG, " address " + device.getAddress());
+        try {
+            btSocket = createBluetoothSocket(device);
+        } catch (IOException e) {
+            Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_LONG).show();
+        }
+        try {
+            btSocket.connect();
+        } catch (IOException e) {
+            try {
+                btSocket.close();
+            } catch (IOException e2) {
+                //insert code to deal with this
+            }
+        }
+        mConnectedThread = new RecipeActivity.ConnectedThread(btSocket);
+        mConnectedThread.start();
+        mConnectedThread.write(input);
+
+
+    }
 
     private class ConnectedThread extends Thread {
         private final InputStream mmInStream;
@@ -489,8 +520,9 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
 
                 //Toast.makeText(getBaseContext(), "Connection Failure", Toast.LENGTH_LONG).show();
                 //finish();
-                connectbt();
-
+                //handler.removeCallbacks(myRunnable);
+                //timerHandler.removeCallbacks(timerRunnable);
+                connectbtWith(input);
             }
         }
     }
