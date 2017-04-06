@@ -107,13 +107,9 @@ public class DeviceListActivity extends Activity {
                         i.putExtra(EXTRA_DEVICE_ADDRESS, address);
                         startActivity(i);
                     }
-
                     dialog.dismiss();
-
-
                 }
             });
-
             dialog.show();
 
 
