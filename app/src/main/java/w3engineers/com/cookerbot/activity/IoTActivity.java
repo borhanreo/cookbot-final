@@ -1,5 +1,8 @@
 package w3engineers.com.cookerbot.activity;
 
+/**
+ * Created by Borhan Uddin on 4/5/2017.
+ */
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;

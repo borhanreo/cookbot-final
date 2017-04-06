@@ -33,6 +33,9 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.model.Box;
 
+/**
+ * Created by Borhan Uddin on 4/5/2017.
+ */
 
 public class GradientsMapActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView mScannerView;
