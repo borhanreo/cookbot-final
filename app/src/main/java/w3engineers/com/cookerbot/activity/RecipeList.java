@@ -123,7 +123,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
             return true;
 
         }else if (id == R.id.action_import_csv) {
-           mDialog = ProgressDialog.show(RecipeList.this,"Please wait...", "CSV file binding data ...", true);
+           mDialog = ProgressDialog.show(RecipeList.this,"Please wait...", "Importing CSV file...", true);
             ImportCsv importCsv = new ImportCsv(this,csvWriteCompletedCallBackListenerImport);
             importCsv.execute();
             return true;
