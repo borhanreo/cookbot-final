@@ -1,9 +1,10 @@
 package w3engineers.com.cookerbot.activity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +28,10 @@ import java.util.List;
 
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.adapter.RecipeAdapter;
+import w3engineers.com.cookerbot.aysctask.CreateCsvFile;
+import w3engineers.com.cookerbot.aysctask.CsvWrite;
+import w3engineers.com.cookerbot.aysctask.ImportCsv;
+import w3engineers.com.cookerbot.controller.CsvWriteCompletedCallBackListener;
 import w3engineers.com.cookerbot.controller.OnItemLongClickCallBackListener;
 import w3engineers.com.cookerbot.controller.OnItemSelectCallBackListener;
 import w3engineers.com.cookerbot.dbhelper.DBHandler;
@@ -37,7 +45,9 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
     private RecyclerView recyclerView;
     private RecipeAdapter mAdapter;
     DBHandler db = new DBHandler(this);
-
+    CreateCsvFile createCsvFile;
+    private ProgressDialog mDialog;
+    private EditText filename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +55,7 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context=this;
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,16 +96,36 @@ public class RecipeList extends AppCompatActivity implements OnItemSelectCallBac
         getMenuInflater().inflate(R.menu.recipe_list_setting, menu);
         return true;
     }
-
+    CsvWriteCompletedCallBackListener csvWriteCompletedCallBackListenerExport = new CsvWriteCompletedCallBackListener() {
+        @Override
+        public void csvCompleted(boolean value) {
+            mDialog.dismiss();
+        }
+    };
+     CsvWriteCompletedCallBackListener csvWriteCompletedCallBackListenerImport = new CsvWriteCompletedCallBackListener() {
+        @Override
+        public void csvCompleted(boolean value) {
+            mDialog.dismiss();
+        }
+    };
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_csv) {
+
+            mDialog = ProgressDialog.show(RecipeList.this,"Please wait...", "Creating CSV file ...", true);
+            CsvWrite csvWrite = new CsvWrite(context, csvWriteCompletedCallBackListenerExport);
+            csvWrite.execute();
+            return true;
+
+        }else if (id == R.id.action_import_csv) {
+           mDialog = ProgressDialog.show(RecipeList.this,"Please wait...", "CSV file binding data ...", true);
+            ImportCsv importCsv = new ImportCsv(this,csvWriteCompletedCallBackListenerImport);
+            importCsv.execute();
             return true;
         }
 

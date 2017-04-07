@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import w3engineers.com.cookerbot.R;
+import w3engineers.com.cookerbot.aysctask.InitCSV;
 import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
 import w3engineers.com.cookerbot.fragment.GameFragment;
 
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        InitCSV initCSV = new InitCSV(this);
+        initCSV.execute();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

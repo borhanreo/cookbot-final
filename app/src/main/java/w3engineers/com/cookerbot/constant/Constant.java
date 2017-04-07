@@ -17,4 +17,12 @@ public class Constant {
     public static int SPUD = 9;
     public static int TIME_DELAY = 10;
 
+    public static String FOLDER_NAME = "CookBOT";
+    public static String CSV_TITLE_ID = "ID";
+    public static String CSV_TITLE_RECIPE_NAME = "RECIPE_NAME";
+    public static String CSV_TITLE_RECIPE_API = "RECIPE_API";
+    public static String CSV_TITLE_RECIPE_GRADIENTS = "RECIPE_GRADIENTS";
+
+
+
 }
