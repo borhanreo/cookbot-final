@@ -71,21 +71,21 @@ public class InitCSV extends AsyncTask<String,Void,String> {
 
                         }else
                         {
-                            CSVWriter writer = null;
-                            try
-                            {
-                                String header = Constant.CSV_TITLE_ID+"#"+Constant.CSV_TITLE_RECIPE_NAME+"#"+Constant.CSV_TITLE_RECIPE_API+"#"+Constant.CSV_TITLE_RECIPE_GRADIENTS;
-                                String[] headerEntity = header.split("#");
-                                writer = new CSVWriter(new FileWriter("/sdcard/CookBOT/"+device_id+".csv"), ',');
-                                writer.writeNext(headerEntity);
-                                writer.close();
-                            }
-                            catch (IOException e)
-                            {
-                                //error
-                            }
-                        }
 
+                        }
+                        CSVWriter writer = null;
+                        try
+                        {
+                            String header = Constant.CSV_TITLE_ID+"#"+Constant.CSV_TITLE_RECIPE_NAME+"#"+Constant.CSV_TITLE_RECIPE_API+"#"+Constant.CSV_TITLE_RECIPE_GRADIENTS;
+                            String[] headerEntity = header.split("#");
+                            writer = new CSVWriter(new FileWriter("/sdcard/CookBOT/"+device_id+".csv"), ',');
+                            writer.writeNext(headerEntity);
+                            writer.close();
+                        }
+                        catch (IOException e)
+                        {
+                            //error
+                        }
                     }
 
 

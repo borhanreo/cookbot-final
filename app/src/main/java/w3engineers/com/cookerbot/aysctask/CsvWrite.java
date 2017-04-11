@@ -46,7 +46,7 @@ public class CsvWrite extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
         //Toast.makeText(,"Data Inserted",Toast.LENGTH_LONG).show();
         //System.out.println("i am err "+s.toString());
-        //csvWriteCompletedCallBackListener.csvCompleted(true);
+        csvWriteCompletedCallBackListener.csvCompleted(true);
     }
 
     public String getRemoveNewLine(String str) {
