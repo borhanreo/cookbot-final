@@ -1,6 +1,7 @@
 package w3engineers.com.cookerbot.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,21 +17,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import w3engineers.com.cookerbot.R;
 import w3engineers.com.cookerbot.aysctask.InitCSV;
 import w3engineers.com.cookerbot.bluetooth.DeviceListActivity;
 import w3engineers.com.cookerbot.fragment.GameFragment;
+import w3engineers.com.cookerbot.permission.CookBotAppPermissions;
+import w3engineers.com.cookerbot.permission.InvokePermission;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private GameFragment fragment;
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        InitCSV initCSV = new InitCSV(this);
-        initCSV.execute();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         initMarshmallowPermission();
+        InitCSV initCSV = new InitCSV(this);
+        initCSV.execute();
 
     }
 
@@ -119,12 +127,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //return true;
     }
 
-    public void initMarshmallowPermission() {
+    /*public void initMarshmallowPermission() {
         ActivityCompat.requestPermissions(MainActivity.this,new String[]{
                 Manifest.permission.BLUETOOTH,
                 Manifest.permission.BLUETOOTH_ADMIN
         },1);
+    }*/
+
+    public void initMarshmallowPermission() {
+
+        if (InvokePermission.getInstance().isPermitted(mContext,
+                CookBotAppPermissions.GetPermissionsArray(CookBotAppPermissions.PERMISSION_BLUETOOTH,
+                        CookBotAppPermissions.PERMISSION_BLUETOOTH_ADMIN,
+                        CookBotAppPermissions.PERMISSION_WRITE_EXTERNAL_STORAGE,
+                        CookBotAppPermissions.PERMISSION_READ_EXTERNAL_STORAGE,
+                        CookBotAppPermissions.PERMISSION_CAMERA))) {
+
+        }else
+        {
+            //Toast.makeText(mContext,"App could not run without permission",Toast.LENGTH_LONG).show();
+        }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
         switch (requestCode) {
