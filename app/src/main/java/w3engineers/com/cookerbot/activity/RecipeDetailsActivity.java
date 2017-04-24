@@ -124,7 +124,6 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
 
         long itemCounter = mAdapter.getSize();
         Log.d("borhan"," total item "+itemCounter);*/
-
         RecipeDetailsModel recipeDetailsModel = new RecipeDetailsModel();
         Log.d(TAG," api "+api);
         String[] apiArr = api.split(":");
