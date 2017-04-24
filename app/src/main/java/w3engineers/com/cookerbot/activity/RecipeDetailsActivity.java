@@ -90,7 +90,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
 
                     int tp = item.getAction_type();
                     hardwareApi=hardwareApi+":"+projectCommon.getGradients(tp)+item.getAction_value();
-
+                    //Log.d(TAG," "+projectCommon.getGradients(tp)+item.getAction_value());
                 }
                 Log.d(TAG," "+hardwareApi);
                 dbHandler.update(Integer.parseInt(id),hardwareApi,rDetails);
@@ -135,19 +135,19 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
                 String parts[] = apiArr[i].split("=");
                 recipeDetailsModel = new RecipeDetailsModel("Oven On", Long.parseLong(parts[1]), "Switch", Constant.OVEN_ON);
                 recipeList.add(recipeDetailsModel);
-            } else if (apiArr[i].contains("-")) {
-                String parts[] = apiArr[i].split("-");
-                if(!parts[0].contains("`"))
+            } else if (apiArr[i].contains("|")) {
+                String parts[] = apiArr[i].split("|");
+                if(!parts[0].contains("|"))
                 {
-                    long actualValue;
+                    /*long actualValue;
                     if(Integer.parseInt(parts[1])<0)
                     {
                         actualValue =0;
                     }else
                     {
                         actualValue = Long.parseLong(parts[1]);
-                    }
-                    recipeDetailsModel = new RecipeDetailsModel("Oven Off",actualValue, "Switch", Constant.OVEN_OFF);
+                    }*/
+                    recipeDetailsModel = new RecipeDetailsModel("Oven Off",0, "Switch", Constant.OVEN_OFF);
                     recipeList.add(recipeDetailsModel);
                 }
 

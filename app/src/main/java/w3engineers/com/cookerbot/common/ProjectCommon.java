@@ -16,7 +16,7 @@ public class ProjectCommon {
             rtn = "b=";
         }else if(Constant.OVEN_OFF==value)
         {
-            rtn="b-";
+            rtn="b|";
         }else if(Constant.OIL==value)
         {
             rtn="o+";
