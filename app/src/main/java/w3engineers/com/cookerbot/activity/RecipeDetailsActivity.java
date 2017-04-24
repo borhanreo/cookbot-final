@@ -147,7 +147,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
                     {
                         actualValue = Long.parseLong(parts[1]);
                     }*/
-                    recipeDetailsModel = new RecipeDetailsModel("Oven Off",0, "Switch", Constant.OVEN_OFF);
+                    recipeDetailsModel = new RecipeDetailsModel("Oven Off",1, "Switch", Constant.OVEN_OFF);
                     recipeList.add(recipeDetailsModel);
                 }
 
