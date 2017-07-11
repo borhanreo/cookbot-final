@@ -240,7 +240,6 @@ public class RecipeDetailsActivity extends AppCompatActivity implements OnItemSe
                 recipeList.add(recipeDetailsModel);
             }
         }
-
     }
 
     @Override
