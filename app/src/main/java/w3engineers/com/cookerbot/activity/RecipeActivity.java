@@ -278,7 +278,6 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");
                 lastSecond=2;
-
             }
         });
         spud_grinding.setOnClickListener(new View.OnClickListener() {
