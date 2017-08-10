@@ -203,7 +203,6 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 lastSecond=1;
             }
         });
-
         onion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
