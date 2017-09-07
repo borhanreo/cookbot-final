@@ -38,7 +38,8 @@
 
     <string name="spud_grinding">SPUD GRINDING</string>
     <string name="timer">TIMER</string>
-    <string name="other">CHICKEN/POTATO/OTHER </string>
+    <string name="other_1">CHICKEN/POTATO/OTHER 1 </string>
+    <string name="other_2">CHICKEN/POTATO/OTHER 2 </string>
     <string name="oven_heat">OVEN HEAT</string>
 
     <string-array name="oven">

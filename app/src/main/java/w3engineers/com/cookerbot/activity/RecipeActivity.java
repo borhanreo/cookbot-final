@@ -50,7 +50,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
     DBHandler db = new DBHandler(this);
     Dialog dialog = null;
     TextView show_recipe_status = null,selected_option;
-    private Button ovenOn,ovenOff,oil,water,onion,chili,salt,mixed_spice,ch_pot_other,spud_grinding,create;
+    private Button ovenOn,ovenOff,oil,water,onion,chili,salt,mixed_spice,ch_pot_other,spud_grinding,create,ch_pot_other2;
     private String globalvalue="", setStr="";
     private TextView recipeName, time;
     private EditText gradients_list;
@@ -106,6 +106,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         salt = (Button)findViewById(R.id.salt);
         mixed_spice = (Button)findViewById(R.id.mixed_spice);
         ch_pot_other = (Button)findViewById(R.id.ch_pot_other);
+        ch_pot_other2 = (Button)findViewById(R.id.ch_pot_other_2);
         spud_grinding = (Button)findViewById(R.id.spud_grinding);
         create = (Button)findViewById(R.id.create);
 
@@ -114,9 +115,24 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
         gradients_list = (EditText) findViewById(R.id.gradients_list);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+            //getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
+        ch_pot_other2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long currentSecond = globalSecond-previousGlobalSecond;
+                previousGlobalSecond = globalSecond;
+                String oilApiStore=":d`"+(currentSecond-lastSecond)+":s#8";
+                String oilApi=":s#8";
+                globalvalue=globalvalue+oilApiStore;
 
+                String appendStr="Being CH/PO/OT 2: ";
+                setStr = setStr+appendStr;
+                selected_option.setText(setStr);
+                mConnectedThread.write("A"+oilApi+"\n");
+                lastSecond=2;
+            }
+        });
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,7 +288,7 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
                 String oilApi=":s#7";
                 globalvalue=globalvalue+oilApiStore;
 
-                String appendStr="Being CH/PO/OT: ";
+                String appendStr="Being CH/PO/OT 1: ";
                 setStr = setStr+appendStr;
                 selected_option.setText(setStr);
                 mConnectedThread.write("A"+oilApi+"\n");

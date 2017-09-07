@@ -22,7 +22,7 @@ import w3engineers.com.cookerbot.model.RecipeModel;
 public class NewRecipe extends AppCompatActivity {
 
     final Context context = this;
-    private Button Oilbutton, reset, WaterButton, spud_grinding, create, onion, chili, salt, mixed_spice, ch_po_ot, oven_heat;
+    private Button Oilbutton, reset, WaterButton, spud_grinding, create, onion, chili, salt, mixed_spice, ch_po_ot, oven_heat,ch_po_ot_2;
     private String hardwareApiString = "", oilStr = "", waterStr = "", TAG = "borhan", spudGrindingStr = "", globStr = "",heatStr="", showText="";
     EditText amount_oil, recipe_name,apiString;
     Spinner amount_heat;
@@ -61,7 +61,19 @@ public class NewRecipe extends AppCompatActivity {
         salt = (Button) findViewById(R.id.salt);
         mixed_spice = (Button) findViewById(R.id.mixed_spice);
         ch_po_ot = (Button) findViewById(R.id.ch_pot_other);
+        ch_po_ot_2 = (Button) findViewById(R.id.ch_pot_other_2);
         oven_heat = (Button) findViewById(R.id.oven_heat);
+
+        ch_po_ot_2.setOnClickListener(new  View.OnClickListener(){
+            public void onClick(View v) {
+                ch_po_ot_2.setEnabled(false);
+                globStr = globStr + ":s#8";
+
+                showText = showText+", CH/PO/OT 2";
+                selected_option.setText(showText);
+
+            }
+        });
 
         onion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +121,7 @@ public class NewRecipe extends AppCompatActivity {
                 ch_po_ot.setEnabled(false);
                 globStr = globStr + ":s#7";
 
-                showText = showText+", CH/PO/OT";
+                showText = showText+", CH/PO/OT 1";
                 selected_option.setText(showText);
             }
         });

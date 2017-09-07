@@ -222,7 +222,7 @@
                 android:background="@drawable/haptic"
                 android:drawableTop="@drawable/chicken"
                 android:paddingTop="5dp"
-                android:text="@string/other"
+                android:text="@string/other_1"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="15sp" />

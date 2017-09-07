@@ -241,7 +241,7 @@
                     android:background="@drawable/haptic"
                     android:drawableTop="@drawable/chicken"
                     android:paddingTop="5dp"
-                    android:text="@string/other"
+                    android:text="@string/other_2"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -259,7 +259,43 @@
                     android:textSize="15sp" />
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout3"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
 
+
+
+
+                <Button
+                    android:id="@+id/ch_pot_other_2"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3256"
+                    android:background="@drawable/haptic"
+                    android:drawableTop="@drawable/chicken"
+                    android:paddingTop="5dp"
+                    android:text="@string/other_2"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <!--<Button
+                    android:id="@+id/b"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3256"
+                    android:background="@drawable/haptic"
+                    android:drawableTop="@drawable/rice"
+                    android:paddingTop="5dp"
+                    android:text="B"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />-->
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
