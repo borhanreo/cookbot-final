@@ -323,9 +323,10 @@ public class RecipeActivity extends AppCompatActivity implements OnItemSelectCal
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
+
                 if (msg.what == handlerState) {
                     String readMessage = (String) msg.obj;
-                    //Log.d(TAG," rrr "+readMessage.toString());
+                    Log.d(TAG," rrr "+readMessage.toString());
                     recDataString.append(readMessage);
                     int endOfLineIndex = recDataString.indexOf("~");
                     if (endOfLineIndex > 0) {

@@ -14,7 +14,7 @@ import w3engineers.com.cookerbot.constant.Constant;
 
 public class SdCard {
     private String TAG = "borhan SdCard";
-
+    String checkfileName="droid";
     boolean isActiveInternal, isActiveExternal;
     private File sdPathFile;
     private File sdPathFolder;

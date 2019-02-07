@@ -41,9 +41,7 @@ import w3engineers.com.cookerbot.model.RecipeModel;
 public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBackListener,OnItemLongClickCallBackListener {
     private String TAG = "borhan IoTActivity";
 
-    private static final int MESH_PORT = 1166;
 
-    private Button configure, send_temp;
     private static String address;
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
@@ -57,11 +55,6 @@ public class IoTActivity extends AppCompatActivity implements OnItemSelectCallBa
     private StringBuilder recDataString = new StringBuilder();
     String dataInPrint;
     int dataLength;
-    private String globalTemp = "";
-    long millisecondMe = 0;
-    int refreshTime = 5000;
-    private long previousRuntime = 0L;
-    private final long TIME_DELAY = 5000L;
 
     private List<RecipeModel> recipeList = new ArrayList<>();
     private RecyclerView recyclerView;

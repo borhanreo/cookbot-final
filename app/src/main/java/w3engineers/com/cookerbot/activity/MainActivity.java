@@ -137,7 +137,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void initMarshmallowPermission() {
 
         if (InvokePermission.getInstance().isPermitted(mContext,
-                CookBotAppPermissions.GetPermissionsArray(CookBotAppPermissions.PERMISSION_BLUETOOTH,
+                CookBotAppPermissions.GetPermissionsArray(
+                        CookBotAppPermissions.PERMISSION_BLUETOOTH,
+                        CookBotAppPermissions.PERMISSION_BLUETOOTH,
                         CookBotAppPermissions.PERMISSION_BLUETOOTH_ADMIN,
                         CookBotAppPermissions.PERMISSION_WRITE_EXTERNAL_STORAGE,
                         CookBotAppPermissions.PERMISSION_READ_EXTERNAL_STORAGE,
